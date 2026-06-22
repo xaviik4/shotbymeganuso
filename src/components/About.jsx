@@ -2,7 +2,7 @@ import './About.css';
 
 const STATS = [
   { num: '3+',     label: 'Years Shooting' },
-  { num: '50+',    label: 'Brands Worked With' },
+  { num: '5+',     label: 'Years Editing' },
   { num: 'Canon',  label: 'R6 Mark II' },
   { num: '24h',    label: 'Response Time' },
 ];
@@ -30,14 +30,15 @@ export default function About() {
             <p className="section-eyebrow">About</p>
             <h2 className="section-title" style={{ fontSize: 'clamp(40px, 6vw, 72px)' }}>WHO I AM</h2>
             <p className="about-bio">
-              I'm <strong>Alexander</strong> — a content creator and visual storyteller based in Santa Barbara, CA.
-              I specialize in <strong>product, automotive, and fitness/lifestyle photography and videography</strong> for
-              brands that want content that actually converts.
+              I'm <strong>Alexander</strong>, a photographer and videographer based in Corvallis, Oregon.
+              I shoot automotive, editorial, lifestyle, and portrait work, focused on creating clean,
+              cinematic content that actually looks good and holds attention.
             </p>
             <p className="about-bio">
-              With a background in engineering and a sharp eye for detail, I bring both{' '}
-              <strong>technical precision and creative instinct</strong> to every shoot. Whether it's a clean product
-              flat lay, a cinematic car edit, or a high-energy UGC ad — I make brands look their best.
+              I care about the details: framing, light, color, and pacing. I bring that same intention to
+              every shoot, whether it's a car edit, a live music set, or a portrait session. My goal is
+              simple. Make the people and brands I work with look their best, and create content they're
+              genuinely proud to share.
             </p>
             <div className="about-stats">
               {STATS.map(s => (
