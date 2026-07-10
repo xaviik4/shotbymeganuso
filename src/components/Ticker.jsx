@@ -1,23 +1,11 @@
-import './Ticker.css';
-
-const ITEMS = [
-  'PRODUCT PHOTOGRAPHY', 'AUTOMOTIVE CONTENT', 'FITNESS & LIFESTYLE', 'UGC VIDEO ADS',
-  'BRAND CONTENT', 'SHORT-FORM VIDEO', 'CONTENT THAT CONVERTS', 'AVAILABLE WORLDWIDE',
-];
-
-// Double the array so the seamless loop works
-const doubled = [...ITEMS, ...ITEMS];
-
 export default function Ticker() {
+  const items = ["Automotive", "Editorial", "Lifestyle", "Portrait", "UGC", "Web Design", "Reels", "Product"];
+  const row = items.map((it, i) => (
+    <span className="ticker-item" key={i}><span>●</span>{it}</span>
+  ));
   return (
-    <div className="ticker-wrap">
-      <div className="ticker-track">
-        {doubled.map((item, i) => (
-          <span className="ticker-item" key={i}>
-            {item}<span className="ticker-dot">✦</span>
-          </span>
-        ))}
-      </div>
+    <div className="ticker" aria-hidden="true">
+      <div className="ticker-track">{row}{row}</div>
     </div>
   );
 }

@@ -1,54 +1,49 @@
-import './About.css';
+import Reveal from "./Reveal";
+import { C } from "../lib/constants";
 
 const STATS = [
-  { num: '3+',     label: 'Years Shooting' },
-  { num: '5+',     label: 'Years Editing' },
-  { num: 'Canon',  label: 'R6 Mark II' },
-  { num: '24h',    label: 'Response Time' },
+  { num: "3+",      label: "Years Shooting" },
+  { num: "5+",      label: "Years Editing" },
+  { num: "R6 MK II", label: "Canon Body" },
+  { num: "24h",     label: "Response Time" },
 ];
 
 export default function About() {
   return (
-    <section id="about">
-      <div className="max-w">
-        <div className="about-inner">
-          <div className="about-img-col">
-            <div className="about-img-wrap">
-              {/* SWAP: Replace with <img src="/images/headshot.jpg" alt="Alexander" /> */}
-              <div className="about-img-placeholder">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                  <circle cx="12" cy="8" r="4" />
-                  <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
-                </svg>
-                <span>Add Headshot</span>
+    <section id="about" aria-labelledby="about-title" style={{ background: C.panel }}>
+      <div className="section">
+        <div className="about-wrap">
+          <Reveal>
+            <div
+              className="about-visual"
+              role="img"
+              aria-label="Portrait placeholder, swap with a photo of Alexander"
+            />
+          </Reveal>
+
+          <Reveal delay={120}>
+            <div>
+              <div className="sec-label">06 / Behind the Lens</div>
+              <h2 className="sec-title" id="about-title">I'm Alexander</h2>
+              <p className="about-text" style={{ marginTop: 18 }}>
+                I shoot the kind of content I want to see: dark, cinematic, and intentional.
+                Automotive, editorial, lifestyle, and portrait work, with an engineer's eye for
+                getting the details right.
+              </p>
+              <p className="about-text">
+                I also build websites that work as hard as the content does. Fully bilingual,
+                English y español, so your brand connects with everyone.
+              </p>
+              <div className="stats-row">
+                {STATS.map(s => (
+                  <div className="stat-box" key={s.label}>
+                    <div className="stat-num">{s.num}</div>
+                    <div className="stat-label">{s.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="about-accent" />
-          </div>
-
-          <div className="about-content">
-            <p className="section-eyebrow">About</p>
-            <h2 className="section-title" style={{ fontSize: 'clamp(40px, 6vw, 72px)' }}>WHO I AM</h2>
-            <p className="about-bio">
-              I'm <strong>Alexander</strong>, a photographer and videographer based in Corvallis, Oregon.
-              I shoot automotive, editorial, lifestyle, and portrait work, focused on creating clean,
-              cinematic content that actually looks good and holds attention.
-            </p>
-            <p className="about-bio">
-              I care about the details: framing, light, color, and pacing. I bring that same intention to
-              every shoot, whether it's a car edit, a live music set, or a portrait session. My goal is
-              simple. Make the people and brands I work with look their best, and create content they're
-              genuinely proud to share.
-            </p>
-            <div className="about-stats">
-              {STATS.map(s => (
-                <div className="stat-item" key={s.label}>
-                  <div className="stat-num">{s.num}</div>
-                  <div className="stat-label">{s.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

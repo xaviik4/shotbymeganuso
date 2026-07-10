@@ -1,62 +1,86 @@
-import { useState, useEffect } from 'react';
-import './Nav.css';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { C } from "../lib/constants";
 
-export default function Nav() {
+const NAV_LINKS = [
+  { label: "The Grade", href: "#grade" },
+  { label: "Work",      href: "#work" },
+  { label: "Services",  href: "#services" },
+  { label: "About",     href: "#about" },
+  { label: "FAQ",       href: "#faq" },
+];
+
+export default function Nav({ menuOpen, setMenuOpen }) {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const fn = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", fn);
+    return () => window.removeEventListener("scroll", fn);
   }, []);
-
-  // Lock body scroll when menu is open
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [menuOpen]);
-
-  const closeMenu = () => setMenuOpen(false);
-
-  const handleNavClick = (e, id) => {
-    e.preventDefault();
-    closeMenu();
-    setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-    }, menuOpen ? 300 : 0);
-  };
 
   return (
     <>
-      <nav className={scrolled ? 'scrolled' : ''}>
-        <a href="#hero" className="nav-logo" onClick={(e) => handleNavClick(e, 'hero')}>
+      <nav className={`nav${scrolled ? " scrolled" : ""}`} aria-label="Main navigation">
+        <a href="#top" className="nav-logo">
+          <span className="rec-dot" aria-hidden="true"></span>
           SHOTBYMEGANUSO
+          <span className="mono">REC</span>
         </a>
-        <ul className="nav-links">
-          <li><a href="#reel"      onClick={(e) => handleNavClick(e, 'reel')}>Reel</a></li>
-          <li><a href="#portfolio" onClick={(e) => handleNavClick(e, 'portfolio')}>Work</a></li>
-          <li><a href="#services"  onClick={(e) => handleNavClick(e, 'services')}>Services</a></li>
-          <li><a href="#about"     onClick={(e) => handleNavClick(e, 'about')}>About</a></li>
-          <li><a href="#contact"   onClick={(e) => handleNavClick(e, 'contact')} className="nav-cta">Let's Build</a></li>
-        </ul>
+
+        <div className="nav-links">
+          {NAV_LINKS.map(l => (
+            <a key={l.href} href={l.href}>{l.label}</a>
+          ))}
+          {/* Router link — same visual style as the other nav links */}
+          <Link to="/clients" className="nav-link-clients">Clients</Link>
+          <a href="#contact" className="nav-cta">Book a Shoot</a>
+        </div>
+
         <button
-          className={`hamburger${menuOpen ? ' open' : ''}`}
-          onClick={() => setMenuOpen(o => !o)}
-          aria-label="Toggle menu"
+          className="nav-hamburger"
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open menu"
           aria-expanded={menuOpen}
         >
           <span /><span /><span />
         </button>
       </nav>
 
-      {/* Mobile menu — rendered in DOM always, visibility via CSS */}
-      <div className={`mobile-menu${menuOpen ? ' open' : ''}`} aria-hidden={!menuOpen}>
-        <a href="#reel"      onClick={(e) => handleNavClick(e, 'reel')}>Reel</a>
-        <a href="#portfolio" onClick={(e) => handleNavClick(e, 'portfolio')}>Work</a>
-        <a href="#services"  onClick={(e) => handleNavClick(e, 'services')}>Services</a>
-        <a href="#about"     onClick={(e) => handleNavClick(e, 'about')}>About</a>
-        <a href="#contact"   onClick={(e) => handleNavClick(e, 'contact')} className="accent">Work with Me</a>
+      {/* Mobile drawer */}
+      <div
+        className={`mobile-drawer${menuOpen ? " open" : ""}`}
+        role="dialog"
+        aria-label="Mobile menu"
+        aria-hidden={!menuOpen}
+      >
+        <button
+          className="mobile-drawer-close"
+          onClick={() => setMenuOpen(false)}
+          aria-label="Close menu"
+        >
+          ✕
+        </button>
+
+        {NAV_LINKS.map(l => (
+          <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}>{l.label}</a>
+        ))}
+
+        <Link
+          to="/clients"
+          onClick={() => setMenuOpen(false)}
+          style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, letterSpacing: 4 }}
+        >
+          Clients
+        </Link>
+
+        <a
+          href="#contact"
+          style={{ color: C.orange }}
+          onClick={() => setMenuOpen(false)}
+        >
+          Book a Shoot
+        </a>
       </div>
     </>
   );

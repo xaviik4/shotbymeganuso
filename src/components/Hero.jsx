@@ -1,24 +1,31 @@
-import './Hero.css';
+import { SOCIALS } from "../lib/constants";
 
 export default function Hero() {
   return (
-    <section id="hero">
-      <p className="hero-eyebrow">Content Creator · Available Worldwide</p>
-      <h1 className="hero-title">
-        SHOT<em>BY</em><br />MEGA<em>NUSO</em>
+    <section className="hero" id="top" aria-label="Introduction">
+      <div className="hero-meta mono fade-up" style={{ animationDelay: "0.1s" }}>
+        <span className="rec-dot" aria-hidden="true"></span>
+        <span>ALEXANDER · PHOTO / VIDEO / WEB</span>
+      </div>
+
+      <h1 className="hero-title fade-up" style={{ animationDelay: "0.2s" }}>
+        Content for brands<br />that refuse<br />to <em>blend in.</em>
       </h1>
-      <p className="hero-tag">
-        <strong>Product, automotive &amp; lifestyle</strong> content that sells.
+
+      <p className="hero-sub fade-up" style={{ animationDelay: "0.35s" }}>
+        Cinematic photo and video with a dark, graded look you can spot from across the feed.
+        Shot with intention, delivered fast, in English y español.
       </p>
-      <a href="#contact" className="btn-primary" onClick={(e) => {
-        e.preventDefault();
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-      }}>
-        Work with Me
-      </a>
-      <div className="hero-scroll">
-        <div className="scroll-line" />
-        <span>Scroll</span>
+
+      <div className="hero-actions fade-up" style={{ animationDelay: "0.5s" }}>
+        <a href="#work" className="btn-primary">View Work</a>
+        <a href="#contact" className="btn-outline">Start a Project</a>
+      </div>
+
+      <div className="hero-socials fade-up" style={{ animationDelay: "0.6s" }}>
+        <a href={SOCIALS.instagram} target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+        <a href={SOCIALS.tiktok}    target="_blank" rel="noopener noreferrer">TIKTOK</a>
+        <a href={SOCIALS.youtube}   target="_blank" rel="noopener noreferrer">YOUTUBE</a>
       </div>
     </section>
   );

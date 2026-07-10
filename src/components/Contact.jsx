@@ -1,123 +1,100 @@
-import { useState } from 'react';
-import './Contact.css';
+import { useState } from "react";
+import Reveal from "./Reveal";
+import { WEB3FORMS_KEY, EMAIL, SOCIALS, C } from "../lib/constants";
 
-const WEB3FORMS_KEY = '81971473-9c81-4cb7-a1f0-f17cfcc42191';
+export default function Contact({ setToast }) {
+  const [form, setForm] = useState({ name: "", email: "", type: "", message: "" });
+  const [sending, setSending] = useState(false);
 
-export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('idle'); // idle | sending | success | error
-
-  const handleChange = (e) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  const handleChange = (e) => setForm(p => ({ ...p, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus('sending');
+    setSending(true);
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: 'New inquiry from shotbymeganuso.com',
-          botcheck: '',
+          subject: `📸 New inquiry: ${form.name} · ${form.type || "General"}`,
           ...form,
         }),
       });
-      const json = await res.json();
-      if (json.success) {
-        setStatus('success');
-        setForm({ name: '', email: '', message: '' });
-        setTimeout(() => setStatus('idle'), 4000);
-      } else {
-        setStatus('error');
-      }
+      setToast(res.ok
+        ? "✅ Inquiry sent. I reply within 24 hours."
+        : "❌ Something broke. Email me directly instead."
+      );
+      if (res.ok) setForm({ name: "", email: "", type: "", message: "" });
     } catch {
-      setStatus('error');
+      setToast("❌ Connection error. Email me directly instead.");
     }
+    setSending(false);
   };
 
-  const btnLabel = {
-    idle:    'Send Message',
-    sending: 'Sending...',
-    success: 'Message Sent ✓',
-    error:   'Something went wrong — try again',
-  }[status];
-
   return (
-    <section id="contact" className="contact-section">
-      <div className="max-w">
-        <div className="contact-inner">
-          <div className="contact-info">
-            <p className="section-eyebrow">Let's Collaborate</p>
-            <h2 className="contact-info-title">READY TO<br />CREATE?</h2>
-            <p className="contact-info-sub">
-              Got a campaign, launch, or brand shoot in mind? Fill out the form and I'll get back to you within 24 hours.
-            </p>
-            <div className="social-links">
-              <a href="https://instagram.com/shotbymeganuso" target="_blank" rel="noopener noreferrer" className="social-link">
-                <span className="social-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <rect x="2" y="2" width="20" height="20" rx="5"/>
-                    <circle cx="12" cy="12" r="5"/>
-                    <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
-                  </svg>
-                </span>
-                @shotbymeganuso
-              </a>
-              <a href="https://tiktok.com/@shotbymeganuso" target="_blank" rel="noopener noreferrer" className="social-link">
-                <span className="social-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.73a4.85 4.85 0 0 1-1.01-.04z"/>
-                  </svg>
-                </span>
-                @shotbymeganuso
-              </a>
-              <a href="https://youtube.com/@shotbymeganuso" target="_blank" rel="noopener noreferrer" className="social-link">
-                <span className="social-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.6 2.7 12 2.7 12 2.7s-4.6 0-6.8.2c-.6.1-1.9.1-3 1.3C1.3 5 1 7 1 7S.7 9.2.7 11.5v2.1c0 2.2.3 4.4.3 4.4s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.5 22.2 12 22.2 12 22.2s4.6 0 6.8-.3c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.3-2.2.3-4.4v-2.1C23.3 9.2 23 7 23 7zM9.7 15.5V8.3l8.1 3.6-8.1 3.6z"/>
-                  </svg>
-                </span>
-                shotbymeganuso
-              </a>
-            </div>
-          </div>
+    <section id="contact" aria-labelledby="contact-title" style={{ background: C.panel }}>
+      <div className="closing">
+        <Reveal>
+          <h2 id="contact-title">Let the work<br /><em>do the talking.</em></h2>
+          <p>Tell me what you're making. I reply within 24 hours, usually faster.</p>
+        </Reveal>
+      </div>
 
-          <form onSubmit={handleSubmit} className="contact-form">
-            <div className="form-group">
-              <label htmlFor="name">Your Name</label>
-              <input
-                type="text" id="name" name="name"
-                placeholder="Brand or contact name"
-                value={form.name} onChange={handleChange} required
-              />
+      <div className="section" style={{ paddingTop: 0 }}>
+        <div className="contact-wrap">
+          <Reveal delay={80}>
+            <div>
+              <div className="contact-line">
+                <span className="mono">EMAIL</span>
+                <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+              </div>
+              <div className="contact-line">
+                <span className="mono">IG</span>
+                <a href={SOCIALS.instagram} target="_blank" rel="noopener noreferrer">@shotbymeganuso</a>
+              </div>
+              <div className="contact-line">
+                <span className="mono">TIKTOK</span>
+                <a href={SOCIALS.tiktok} target="_blank" rel="noopener noreferrer">@shotbymeganuso</a>
+              </div>
+              <div className="contact-line">
+                <span className="mono">YT</span>
+                <a href={SOCIALS.youtube} target="_blank" rel="noopener noreferrer">@shotbymeganuso</a>
+              </div>
             </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email" id="email" name="email"
-                placeholder="you@brand.com"
-                value={form.email} onChange={handleChange} required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="message">Tell Me About Your Project</label>
-              <textarea
-                id="message" name="message"
-                placeholder="What are you shooting? Timeline? Budget range?"
-                value={form.message} onChange={handleChange} required
-              />
-            </div>
-            <button
-              type="submit"
-              className={`submit-btn${status === 'success' ? ' success' : ''}${status === 'error' ? ' error' : ''}`}
-              disabled={status === 'sending'}
-            >
-              {btnLabel}
-            </button>
-          </form>
+          </Reveal>
+
+          <Reveal delay={160}>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label className="form-label" htmlFor="in-name">Name *</label>
+                <input id="in-name" name="name" value={form.name} onChange={handleChange} className="form-input" placeholder="Your name" required />
+              </div>
+              <div className="form-group">
+                <label className="form-label" htmlFor="in-email">Email *</label>
+                <input id="in-email" name="email" type="email" value={form.email} onChange={handleChange} className="form-input" placeholder="you@brand.com" required />
+              </div>
+              <div className="form-group">
+                <label className="form-label" htmlFor="in-type">Project Type</label>
+                <select id="in-type" name="type" value={form.type} onChange={handleChange} className="form-input">
+                  <option value="">Select one</option>
+                  <option>Automotive shoot</option>
+                  <option>Editorial / sports</option>
+                  <option>Lifestyle / portrait</option>
+                  <option>UGC / short-form video</option>
+                  <option>Website design</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label className="form-label" htmlFor="in-msg">Project Details *</label>
+                <textarea id="in-msg" name="message" value={form.message} onChange={handleChange} className="form-input" placeholder="What are we making?" required />
+              </div>
+              <button type="submit" className="form-submit" disabled={sending}>
+                {sending ? "Sending..." : "Send Inquiry →"}
+              </button>
+            </form>
+          </Reveal>
         </div>
       </div>
     </section>
