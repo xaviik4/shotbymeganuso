@@ -7,6 +7,8 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import ClientPortal from "./pages/ClientPortal";
+import WorkPage from "./pages/WorkPage";
+import Pricing from "./pages/Pricing";
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,36 +26,61 @@ export default function App() {
     }
   }, [toast]);
 
+  // Shared public layout — Nav, main, Footer, toast
+  const PublicLayout = ({ children }) => (
+    <>
+      <a href="#main" className="skip-link">Skip to main content</a>
+      <Nav menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <main id="main">{children}</main>
+      <Footer />
+      <div
+        className={`toast${showToast ? " show" : ""}`}
+        role="status"
+        aria-live="polite"
+      >
+        {toast}
+      </div>
+    </>
+  );
+
   return (
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          {/* ── Public: full portfolio with shared Nav + Footer ── */}
+          {/* ── Public: Home ── */}
           <Route
             path="/"
             element={
-              <>
-                <a href="#main" className="skip-link">Skip to main content</a>
-                <Nav menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-                <main id="main">
-                  <Home setToast={setToast} />
-                </main>
-                <Footer />
-                <div
-                  className={`toast${showToast ? " show" : ""}`}
-                  role="status"
-                  aria-live="polite"
-                >
-                  {toast}
-                </div>
-              </>
+              <PublicLayout>
+                <Home setToast={setToast} />
+              </PublicLayout>
+            }
+          />
+
+          {/* ── Public: Work (full portfolio) ── */}
+          <Route
+            path="/work"
+            element={
+              <PublicLayout>
+                <WorkPage />
+              </PublicLayout>
+            }
+          />
+
+          {/* ── Public: Pricing (web design) ── */}
+          <Route
+            path="/pricing"
+            element={
+              <PublicLayout>
+                <Pricing />
+              </PublicLayout>
             }
           />
 
           {/* ── Public: login page (no Nav/Footer) ── */}
           <Route path="/login" element={<Login />} />
 
-          {/* ── Protected: client portal (no Nav/Footer) ── */}
+          {/* ── Protected: client portal (no Nav/Footer, hidden from nav) ── */}
           <Route element={<ProtectedRoute />}>
             <Route path="/clients" element={<ClientPortal />} />
           </Route>

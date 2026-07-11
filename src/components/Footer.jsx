@@ -10,11 +10,10 @@ export default function Footer() {
           SHOTBYMEGANUSO
         </div>
         <div className="footer-links">
-          <a href="#work">Work</a>
-          <a href="#services">Services</a>
+          <Link to="/work">Work</Link>
+          <Link to="/pricing">Pricing</Link>
           <a href={SOCIALS.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href={`mailto:${EMAIL}`}>Email</a>
-          <Link to="/clients">Client Portal</Link>
         </div>
         <span className="mono" style={{ fontSize: 11, color: "#777" }}>
           © {new Date().getFullYear()} ALEXANDER · EN / ES

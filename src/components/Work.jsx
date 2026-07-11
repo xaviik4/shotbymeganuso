@@ -2,21 +2,27 @@ import { useState } from "react";
 import Reveal from "./Reveal";
 import { WORK, CATEGORIES } from "../lib/constants";
 
-export default function Work() {
+/**
+ * Portfolio grid with filters.
+ * When `hideHeading` is true, hides the section label/title/sub
+ * (used by the Work page which supplies its own hero header).
+ */
+export default function Work({ hideHeading = false }) {
   const [filter, setFilter] = useState("All");
   const filtered = filter === "All" ? WORK : WORK.filter(w => w.cat === filter);
 
   return (
     <section id="work" aria-labelledby="work-title">
       <div className="section">
-        <Reveal>
-          <div className="sec-label">03 / Selected Work</div>
-          <h2 className="sec-title" id="work-title">The Portfolio</h2>
-          <p className="sec-sub">
-            Shot on the Canon R6 Mark II. Automotive, editorial, lifestyle, and portrait work,
-            with UGC in the mix.
-          </p>
-        </Reveal>
+        {!hideHeading && (
+          <Reveal>
+            <div className="sec-label">03 / Selected Work</div>
+            <h2 className="sec-title" id="work-title">The Portfolio</h2>
+            <p className="sec-sub">
+              Shot on the Canon R6 Mark II. Automotive, editorial, lifestyle, and portrait work.
+            </p>
+          </Reveal>
+        )}
 
         <div className="filter-row" role="tablist" aria-label="Filter portfolio by category">
           {CATEGORIES.map(c => (
@@ -57,7 +63,6 @@ export default function Work() {
               <div className="work-overlay">
                 <span className="work-cat">{w.cat}</span>
                 <span className="work-title">{w.title}</span>
-                <span className="work-exif">{w.exif}</span>
               </div>
             </div>
           ))}

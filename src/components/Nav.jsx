@@ -1,17 +1,24 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { C } from "../lib/constants";
 
+/**
+ * Nav links.
+ * - `to`   → React Router route (top-level pages)
+ * - `hash` → section on the Home page (about, contact, etc.)
+ */
 const NAV_LINKS = [
-  { label: "The Grade", href: "#grade" },
-  { label: "Work",      href: "#work" },
-  { label: "Services",  href: "#services" },
-  { label: "About",     href: "#about" },
-  { label: "FAQ",       href: "#faq" },
+  { label: "Home",    to: "/" },
+  { label: "Work",    to: "/work" },
+  { label: "Pricing", to: "/pricing" },
+  { label: "About",   hash: "about" },
+  { label: "Contact", hash: "contact" },
 ];
 
 export default function Nav({ menuOpen, setMenuOpen }) {
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
@@ -19,22 +26,60 @@ export default function Nav({ menuOpen, setMenuOpen }) {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
+  // For hash links: if not on Home, navigate to Home then scroll.
+  const handleHashClick = (hash) => (e) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+      }, 120);
+    } else {
+      document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // For "Book a Shoot" CTA — always goes to Contact
+  const goToContact = (e) => {
+    e.preventDefault();
+    handleHashClick("contact")(e);
+  };
+
+  const renderLink = (l, isMobile = false) => {
+    const closeMenu = () => setMenuOpen(false);
+    if (l.to) {
+      return (
+        <Link key={l.label} to={l.to} onClick={closeMenu}>
+          {l.label}
+        </Link>
+      );
+    }
+    return (
+      <a
+        key={l.label}
+        href={`#${l.hash}`}
+        onClick={handleHashClick(l.hash)}
+      >
+        {l.label}
+      </a>
+    );
+  };
+
   return (
     <>
       <nav className={`nav${scrolled ? " scrolled" : ""}`} aria-label="Main navigation">
-        <a href="#top" className="nav-logo">
+        <Link to="/" className="nav-logo">
           <span className="rec-dot" aria-hidden="true"></span>
           SHOTBYMEGANUSO
           <span className="mono">REC</span>
-        </a>
+        </Link>
 
         <div className="nav-links">
-          {NAV_LINKS.map(l => (
-            <a key={l.href} href={l.href}>{l.label}</a>
-          ))}
-          {/* Router link — same visual style as the other nav links */}
-          <Link to="/clients" className="nav-link-clients">Clients</Link>
-          <a href="#contact" className="nav-cta">Book a Shoot</a>
+          {NAV_LINKS.map(l => renderLink(l))}
+          <a href="#contact" className="nav-cta" onClick={goToContact}>
+            Book a Shoot
+          </a>
         </div>
 
         <button
@@ -62,22 +107,12 @@ export default function Nav({ menuOpen, setMenuOpen }) {
           ✕
         </button>
 
-        {NAV_LINKS.map(l => (
-          <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}>{l.label}</a>
-        ))}
-
-        <Link
-          to="/clients"
-          onClick={() => setMenuOpen(false)}
-          style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, letterSpacing: 4 }}
-        >
-          Clients
-        </Link>
+        {NAV_LINKS.map(l => renderLink(l, true))}
 
         <a
           href="#contact"
           style={{ color: C.orange }}
-          onClick={() => setMenuOpen(false)}
+          onClick={goToContact}
         >
           Book a Shoot
         </a>

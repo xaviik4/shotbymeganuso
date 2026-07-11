@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { SOCIALS } from "../lib/constants";
 
 export default function Hero() {
@@ -13,12 +14,12 @@ export default function Hero() {
       </h1>
 
       <p className="hero-sub fade-up" style={{ animationDelay: "0.35s" }}>
-        Cinematic photo and video with a dark, graded look you can spot from across the feed.
-        Shot with intention, delivered fast, in English y español.
+        Cinematic photo and video, graded look you can spot from across the feed.
+        Shot with intention, delivered fast, in English y en Español.
       </p>
 
       <div className="hero-actions fade-up" style={{ animationDelay: "0.5s" }}>
-        <a href="#work" className="btn-primary">View Work</a>
+        <Link to="/work" className="btn-primary">View Work</Link>
         <a href="#contact" className="btn-outline">Start a Project</a>
       </div>
 

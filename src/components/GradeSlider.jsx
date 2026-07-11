@@ -22,9 +22,10 @@ export default function GradeSlider() {
             <div className="ba-layer ba-clip" style={{ width: `${pos}%` }} aria-hidden="true">
               <div className="ba-layer ba-before"></div>
             </div>
+            {/* TO ADD REAL IMAGES: set background-image on .ba-before and .ba-after
+                in global.css — before.webp = ungraded/SOOC, after.webp = graded */}
             <span className="ba-tag raw">RAW / SOOC</span>
             <span className="ba-tag graded">GRADED</span>
-            <span className="ba-photonote">DROP before.webp + after.webp AS BACKGROUNDS</span>
             <div className="ba-divider" style={{ left: `${pos}%` }} aria-hidden="true">
               <div className="ba-handle">↔</div>
             </div>
