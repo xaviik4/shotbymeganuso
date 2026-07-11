@@ -9,7 +9,7 @@ export default function Faq() {
     <section id="faq" aria-labelledby="faq-title">
       <div className="section">
         <Reveal>
-          <div className="sec-label">07 / Questions</div>
+          <div className="sec-label">06 / Questions</div>
           <h2 className="sec-title" id="faq-title">FAQ</h2>
         </Reveal>
 

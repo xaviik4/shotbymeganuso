@@ -26,6 +26,12 @@ export default function Nav({ menuOpen, setMenuOpen }) {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
+  // Lock body scroll while the mobile drawer is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
   // For hash links: if not on Home, navigate to Home then scroll.
   const handleHashClick = (hash) => (e) => {
     e.preventDefault();

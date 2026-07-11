@@ -16,7 +16,7 @@ export default function WorkPage() {
       >
         <div className="section" style={{ textAlign: "center" }}>
           <Reveal>
-            <div className="sec-label">03 / Selected Work</div>
+            <div className="sec-label">Selected Work</div>
             <h1 className="sec-title" id="work-page-title">The Archive</h1>
             <p className="sec-sub" style={{ maxWidth: 620, margin: "0 auto" }}>
               A collection of photography across automotive, editorial, lifestyle,

@@ -10,17 +10,17 @@ export const SOCIALS = {
 /* ─── PORTFOLIO DATA ───────────────────────────────────────────────── */
 export const WORK = [
   // AUTOMOTIVE (8)
-  { cat: "Automotive", title: "Porsche 911 GT3 RS", img: "/images/Automotive/CH0A1961.jpg", tall: true, },
-  { cat: "Automotive", title: "Porsche Macan", img: "/images/Automotive/CH0A1967.jpg", },
+  { cat: "Automotive", title: "Car Shoot", img: "/images/Automotive/CH0A1961.jpg", tall: true, },
+  { cat: "Automotive", title: "Car Shoot", img: "/images/Automotive/CH0A1967.jpg", },
   { cat: "Automotive", title: "BMW M4", img: "/images/Automotive/DSC05096.jpg", },
   { cat: "Automotive", title: "BMW M4", img: "/images/Automotive/DSC05115.jpg", tall: true, },
   { cat: "Automotive", title: "BMW M4", img: "/images/Automotive/DSC05173.jpg", },
   { cat: "Automotive", title: "BMW M4", img: "/images/Automotive/DSC05179.jpg", },
-  { cat: "Automotive", title: "Mary's Peak", img: "/images/Automotive/DSC06288.jpg", tall: true, },
-  { cat: "Automotive", title: "Mary's Peak", img: "/images/Automotive/DSC06299.jpg", },
+  { cat: "Automotive", title: "Coastal Drive", img: "/images/Automotive/DSC06288.jpg", tall: true, },
+  { cat: "Automotive", title: "Coastal Drive", img: "/images/Automotive/DSC06299.jpg", },
   // EDITORIAL (19)
-  { cat: "Editorial", title: "Model", img: "/images/Editorial/CH0A1414.jpg", },
-  { cat: "Editorial", title: "Model", img: "/images/Editorial/CH0A1422.jpg", tall: true, },
+  { cat: "Editorial", title: "Carson", img: "/images/Editorial/CH0A1414.jpg", },
+  { cat: "Editorial", title: "Carson", img: "/images/Editorial/CH0A1422.jpg", tall: true, },
   { cat: "Editorial", title: "OSU Basketball", img: "/images/Editorial/CH0A3104.jpg", },
   { cat: "Editorial", title: "OSU Basketball", img: "/images/Editorial/CH0A3105.jpg", },
   { cat: "Editorial", title: "OSU Basketball", img: "/images/Editorial/CH0A3115.jpg", tall: true, },
@@ -39,19 +39,19 @@ export const WORK = [
   { cat: "Editorial", title: "The Bricklayers", img: "/images/Editorial/CH0A7148.jpg", },
   { cat: "Editorial", title: "The Bricklayers", img: "/images/Editorial/CH0A7172.jpg", },
   // LIFESTYLE (15)
-  { cat: "Lifestyle", title: "Santa Barbara", img: "/images/Lifestyle/CH0A1955.jpg", tall: true, },
-  { cat: "Lifestyle", title: "Santa Barbara", img: "/images/Lifestyle/CH0A1969.jpg", },
-  { cat: "Lifestyle", title: "Santa Barbara Coastline", img: "/images/Lifestyle/CH0A2018.jpg", },
-  { cat: "Lifestyle", title: "Santa Barbara", img: "/images/Lifestyle/CH0A2037.jpg", tall: true, },
-  { cat: "Lifestyle", title: "Solvang", img: "/images/Lifestyle/CH0A2226.jpg", },
-  { cat: "Lifestyle", title: "Santa Barbara Zoo", img: "/images/Lifestyle/CH0A2333.jpg", },
-  { cat: "Lifestyle", title: "Bird Watching", img: "/images/Lifestyle/CH0A3033.jpg", tall: true, },
-  { cat: "Lifestyle", title: "Bird Watching", img: "/images/Lifestyle/CH0A3036.jpg", },
-  { cat: "Lifestyle", title: "Bird Watching", img: "/images/Lifestyle/CH0A3075.jpg", },
+  { cat: "Lifestyle", title: "Overlook", img: "/images/Lifestyle/CH0A1955.jpg", tall: true, },
+  { cat: "Lifestyle", title: "Overlook", img: "/images/Lifestyle/CH0A1969.jpg", },
+  { cat: "Lifestyle", title: "Coastline", img: "/images/Lifestyle/CH0A2018.jpg", },
+  { cat: "Lifestyle", title: "On Location", img: "/images/Lifestyle/CH0A2037.jpg", tall: true, },
+  { cat: "Lifestyle", title: "On Location", img: "/images/Lifestyle/CH0A2226.jpg", },
+  { cat: "Lifestyle", title: "On Location", img: "/images/Lifestyle/CH0A2333.jpg", },
+  { cat: "Lifestyle", title: "Crater Lake", img: "/images/Lifestyle/CH0A3033.jpg", tall: true, },
+  { cat: "Lifestyle", title: "Crater Lake", img: "/images/Lifestyle/CH0A3036.jpg", },
+  { cat: "Lifestyle", title: "Morning Fog", img: "/images/Lifestyle/CH0A3075.jpg", },
   { cat: "Lifestyle", title: "Chicago", img: "/images/Lifestyle/Chi-Town2.jpg", tall: true, },
   { cat: "Lifestyle", title: "Chicago", img: "/images/Lifestyle/Chi-Town4.jpg", },
-  { cat: "Lifestyle", title: "Mary's Peak", img: "/images/Lifestyle/DSC05837.jpg", },
-  { cat: "Lifestyle", title: "Mary's Peak", img: "/images/Lifestyle/DSC05839.jpg", tall: true, },
+  { cat: "Lifestyle", title: "Summit", img: "/images/Lifestyle/DSC05837.jpg", },
+  { cat: "Lifestyle", title: "Summit", img: "/images/Lifestyle/DSC05839.jpg", tall: true, },
   { cat: "Lifestyle", title: "Mary's Peak", img: "/images/Lifestyle/DSC06315.jpg", },
   { cat: "Lifestyle", title: "Mary's Peak", img: "/images/Lifestyle/DSC06338.jpg", },
   // PORTRAIT (26)
@@ -157,6 +157,108 @@ export const PRICING_PROOF = {
 };
 // NOTE: proof desc intentionally does not claim "no account needed" —
 // booking flow uses Google login to verify real users.
+
+/* ─── PHOTO PRICING ────────────────────────────────────────────────── */
+export const PHOTO_TIERS = [
+  {
+    name: "Mini",
+    price: "$150",
+    billing: "Per session",
+    subtitle: "Quick and focused. Great for personal branding and fast portraits.",
+    features: [
+      "1 hour of shooting",
+      "1 location",
+      "~15 edited photos",
+      "Full color grade on every image",
+      "Delivered in 5–7 days",
+    ],
+    cta: "Book Mini",
+    highlight: false,
+  },
+  {
+    name: "Standard",
+    price: "$300",
+    billing: "Per session",
+    subtitle: "The most popular option for content, products, and portraits.",
+    features: [
+      "2 hours of shooting",
+      "Up to 2 locations",
+      "~40 edited photos",
+      "Full color grade on every image",
+      "Delivered in 5–7 days",
+      "Priority scheduling",
+    ],
+    cta: "Book Standard",
+    highlight: true,
+  },
+  {
+    name: "Premium",
+    price: "$550",
+    billing: "Per session",
+    subtitle: "A full half-day shoot for brands and bigger projects.",
+    features: [
+      "4 hours of shooting",
+      "Multiple locations",
+      "~80 edited photos",
+      "Full color grade on every image",
+      "Delivered in 7–10 days",
+      "Priority scheduling",
+    ],
+    cta: "Book Premium",
+    highlight: false,
+  },
+];
+
+/* ─── VIDEO PRICING ────────────────────────────────────────────────── */
+export const VIDEO_TIERS = [
+  {
+    name: "Short-Form",
+    price: "$250",
+    billing: "Per video",
+    subtitle: "One scroll-stopping vertical video, shot and edited.",
+    features: [
+      "1 edited vertical video",
+      "Up to 60 seconds",
+      "Shot and edited by me",
+      "Full color grade",
+      "Formatted for Reels and TikTok",
+    ],
+    cta: "Book Short-Form",
+    highlight: false,
+  },
+  {
+    name: "Content Pack",
+    price: "$600",
+    billing: "Per shoot day",
+    subtitle: "Best value. Three short-form videos from a single shoot.",
+    features: [
+      "3 edited short-form videos",
+      "All from one shoot day",
+      "Shot and edited by me",
+      "Full color grade",
+      "Formatted for every platform",
+      "Priority scheduling",
+    ],
+    cta: "Book Content Pack",
+    highlight: true,
+  },
+  {
+    name: "Brand Film",
+    price: "$1,200",
+    billing: "Per film",
+    subtitle: "A polished hero video for your brand or launch.",
+    features: [
+      "1 long-form video (60–90 sec)",
+      "B-roll and coverage",
+      "Cinematic color grade",
+      "Licensed music",
+      "Sound design and mixing",
+      "Delivered in 10–14 days",
+    ],
+    cta: "Book Brand Film",
+    highlight: false,
+  },
+];
 
 export const PRICING_FAQ = [
   { q: "What is the process like?", a: "We hop on a call to talk through your vision, timeline, and budget. From there I send a quote and contract. Once signed and the deposit is in, I start on design mockups, then build, revise, and launch. You get updates at every stage." },

@@ -24,7 +24,7 @@ export default function Services() {
     <section id="services" aria-labelledby="services-title" style={{ background: C.panel }}>
       <div className="section">
         <Reveal>
-          <div className="sec-label">04 / Services</div>
+          <div className="sec-label">03 / Services</div>
           <h2 className="sec-title" id="services-title">What I Do</h2>
         </Reveal>
 

@@ -23,7 +23,7 @@ export default function About() {
 
           <Reveal delay={120}>
             <div>
-              <div className="sec-label">06 / Behind the Lens</div>
+              <div className="sec-label">05 / Behind the Lens</div>
               <h2 className="sec-title" id="about-title">I'm Alexander</h2>
 
               <p className="about-text" style={{ marginTop: 18 }}>

@@ -16,7 +16,7 @@ export default function Work({ hideHeading = false }) {
       <div className="section">
         {!hideHeading && (
           <Reveal>
-            <div className="sec-label">03 / Selected Work</div>
+            <div className="sec-label">Selected Work</div>
             <h2 className="sec-title" id="work-title">The Portfolio</h2>
             <p className="sec-sub">
               Shot on the Canon R6 Mark II. Automotive, editorial, lifestyle, and portrait work.

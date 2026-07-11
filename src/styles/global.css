@@ -65,7 +65,7 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 900px) { .nav { padding: 14px 20px; } .nav-links { display: none; } .nav-hamburger { display: flex; } }
 
 .mobile-drawer {
-  position: fixed; inset: 0; background: rgba(10,10,10,0.98); z-index: 99;
+  position: fixed; inset: 0; background: rgba(10,10,10,0.98); z-index: 200;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;
   transform: translateX(100%); transition: transform 0.35s cubic-bezier(.77,0,.175,1);
 }
@@ -73,9 +73,14 @@ a { color: inherit; text-decoration: none; }
 .mobile-drawer a { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 4px; }
 .mobile-drawer a:hover { color: #FF4D00; }
 .mobile-drawer-close {
-  position: absolute; top: 20px; right: 24px;
-  background: none; border: none; color: #F2F0EB; font-size: 32px; cursor: pointer; padding: 8px;
+  position: absolute; top: 14px; right: 20px;
+  background: none; border: none; color: #F2F0EB; font-size: 28px; cursor: pointer;
+  padding: 8px; line-height: 1;
+  z-index: 201;
 }
+/* When the drawer is open, hide the nav bar underneath so the hamburger
+   and logo don't show through on top of the menu */
+body:has(.mobile-drawer.open) .nav { opacity: 0; pointer-events: none; }
 
 /* ─── HERO ─────────────────────────────────────────────────────────── */
 .hero {

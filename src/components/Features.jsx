@@ -6,7 +6,7 @@ export default function Features() {
     <section aria-labelledby="features-title">
       <div className="section">
         <Reveal>
-          <div className="sec-label">05 / The Standard</div>
+          <div className="sec-label">04 / The Standard</div>
           <h2 className="sec-title" id="features-title">What You Get</h2>
         </Reveal>
 
