@@ -167,7 +167,7 @@ export const RECIPES = [
     name: "Pollo a la Plancha con Mojo",
     blurb: "Pressed chicken breast under a garlic citrus mojo. The leanest thing in the book.",
     image: "/images/Cookbook/cu-pollo-plancha-mojo.jpg",
-    macros: { calories: 300, protein: 52, carbs: 6, fat: 8 },
+    macros: { calories: 250, protein: 38, carbs: 6, fat: 8 },
     micros: { fiber: 1, sodium: 420, sugar: 3, potassium: 720, calcium: 30, iron: 1.3, vitaminC: 30 },
     prep: "30 min", cook: "10 min", makes: 4,
     ingredients: [
@@ -196,7 +196,7 @@ export const RECIPES = [
     name: "Picadillo de Pavo",
     blurb: "Ground turkey picadillo. Raisins and olives keep it honest.",
     image: "/images/Cookbook/cu-picadillo.jpg",
-    macros: { calories: 330, protein: 40, carbs: 20, fat: 10 },
+    macros: { calories: 280, protein: 32, carbs: 20, fat: 8 },
     micros: { fiber: 3, sodium: 690, sugar: 8, potassium: 780, calcium: 50, iron: 2.6, vitaminC: 40 },
     prep: "10 min", cook: "25 min", makes: 4,
     ingredients: [
@@ -296,7 +296,7 @@ export const RECIPES = [
     name: "Cabillaud en Papillote",
     blurb: "Cod steamed in parchment. Zero added fat and nothing to clean.",
     image: "/images/Cookbook/fr-cabillaud-papillote.jpg",
-    macros: { calories: 260, protein: 40, carbs: 12, fat: 6 },
+    macros: { calories: 225, protein: 31, carbs: 12, fat: 6 },
     micros: { fiber: 4, sodium: 380, sugar: 4, potassium: 980, calcium: 80, iron: 1.2, vitaminC: 22 },
     prep: "10 min", cook: "18 min", makes: 2,
     ingredients: [
@@ -360,7 +360,7 @@ export const RECIPES = [
     name: "Tom Yum Goong",
     blurb: "Clear version, no coconut milk. A full bowl for under 200 calories.",
     image: "/images/Cookbook/th-tom-yum-goong.jpg",
-    macros: { calories: 185, protein: 28, carbs: 11, fat: 4 },
+    macros: { calories: 170, protein: 23, carbs: 11, fat: 4 },
     micros: { fiber: 2, sodium: 1120, sugar: 4, potassium: 560, calcium: 80, iron: 1.5, vitaminC: 12 },
     prep: "10 min", cook: "20 min", makes: 4,
     ingredients: [
@@ -459,7 +459,7 @@ export const RECIPES = [
     name: "Chana Masala",
     blurb: "Chickpeas built out with fiber. Pair with a grilled protein on a heavy training day.",
     image: "/images/Cookbook/in-chana-masala.jpg",
-    macros: { calories: 265, protein: 14, carbs: 40, fat: 6 },
+    macros: { calories: 255, protein: 10, carbs: 40, fat: 6 },
     micros: { fiber: 11, sodium: 420, sugar: 7, potassium: 640, calcium: 90, iron: 3.4, vitaminC: 14 },
     prep: "10 min", cook: "30 min", makes: 4,
     ingredients: [
@@ -494,7 +494,7 @@ export const RECIPES = [
     name: "Tandoori Salmon with Raita",
     blurb: "Salmon under a dry spice crust with a cooling cucumber yogurt.",
     image: "/images/Cookbook/in-tandoori-salmon.jpg",
-    macros: { calories: 390, protein: 42, carbs: 9, fat: 20 },
+    macros: { calories: 315, protein: 34, carbs: 9, fat: 16 },
     micros: { fiber: 1, sodium: 380, sugar: 5, potassium: 900, calcium: 140, iron: 1.1, vitaminC: 5 },
     prep: "30 min", cook: "12 min", makes: 4,
     ingredients: [
@@ -594,7 +594,7 @@ export const RECIPES = [
     name: "Tinga de Pollo",
     blurb: "Shredded chicken in chipotle and tomato. Serve in lettuce cups.",
     image: "/images/Cookbook/mx-tinga-pollo.jpg",
-    macros: { calories: 280, protein: 46, carbs: 13, fat: 6 },
+    macros: { calories: 310, protein: 51, carbs: 13, fat: 6 },
     micros: { fiber: 3, sodium: 620, sugar: 6, potassium: 820, calcium: 60, iron: 2, vitaminC: 18 },
     prep: "10 min", cook: "30 min", makes: 4,
     ingredients: [
@@ -630,7 +630,7 @@ export const RECIPES = [
     name: "Sake Shioyaki",
     blurb: "Salt grilled salmon. Two ingredients and a technique.",
     image: "/images/Cookbook/jp-salmon-shioyaki.jpg",
-    macros: { calories: 340, protein: 40, carbs: 0, fat: 19 },
+    macros: { calories: 280, protein: 34, carbs: 0, fat: 16 },
     micros: { fiber: 0, sodium: 640, sugar: 0, potassium: 780, calcium: 25, iron: 0.8, vitaminC: 4 },
     prep: "30 min", cook: "12 min", makes: 4,
     ingredients: [
@@ -687,7 +687,7 @@ export const RECIPES = [
     name: "Miso Glazed Cod",
     blurb: "The famous one, scaled back on sugar. Marinate a day ahead.",
     image: "/images/Cookbook/jp-miso-cod.jpg",
-    macros: { calories: 265, protein: 39, carbs: 10, fat: 5 },
+    macros: { calories: 210, protein: 31, carbs: 10, fat: 5 },
     micros: { fiber: 1, sodium: 780, sugar: 7, potassium: 620, calcium: 40, iron: 0.7, vitaminC: 2 },
     prep: "24 hr", cook: "10 min", makes: 4,
     ingredients: [
@@ -716,7 +716,7 @@ export const RECIPES = [
     name: "Chicken Piccata",
     blurb: "Lemon and caper pan sauce with one tablespoon of butter across four plates.",
     image: "/images/Cookbook/it-chicken-piccata.jpg",
-    macros: { calories: 320, protein: 50, carbs: 8, fat: 10 },
+    macros: { calories: 275, protein: 38, carbs: 8, fat: 10 },
     micros: { fiber: 1, sodium: 620, sugar: 2, potassium: 700, calcium: 40, iron: 1.4, vitaminC: 8 },
     prep: "10 min", cook: "18 min", makes: 4,
     ingredients: [
@@ -848,7 +848,7 @@ export const RECIPES = [
     name: "Ginger Scallion Steamed Fish",
     blurb: "Cantonese steamed fish. Lean, fast, and hard to overthink.",
     image: "/images/Cookbook/cn-steamed-fish.jpg",
-    macros: { calories: 250, protein: 38, carbs: 4, fat: 9 },
+    macros: { calories: 220, protein: 31, carbs: 4, fat: 9 },
     micros: { fiber: 1, sodium: 700, sugar: 2, potassium: 720, calcium: 45, iron: 0.9, vitaminC: 6 },
     prep: "10 min", cook: "12 min", makes: 4,
     ingredients: [
@@ -1147,7 +1147,7 @@ export const RECIPES = [
     name: "Psari Plaki",
     blurb: "Cod baked over tomatoes and onions. One dish, one pan.",
     image: "/images/Cookbook/gr-bakaliaros-plaki.jpg",
-    macros: { calories: 285, protein: 40, carbs: 16, fat: 8 },
+    macros: { calories: 260, protein: 31, carbs: 16, fat: 8 },
     micros: { fiber: 4, sodium: 480, sugar: 8, potassium: 1050, calcium: 90, iron: 1.6, vitaminC: 30 },
     prep: "15 min", cook: "35 min", makes: 4,
     ingredients: [
@@ -1179,7 +1179,7 @@ export const RECIPES = [
     name: "Horiatiki with Grilled Shrimp",
     blurb: "Village salad with shrimp on top. No lettuce, that is the traditional version.",
     image: "/images/Cookbook/gr-horiatiki-garides.jpg",
-    macros: { calories: 320, protein: 36, carbs: 14, fat: 14 },
+    macros: { calories: 360, protein: 45, carbs: 14, fat: 14 },
     micros: { fiber: 4, sodium: 880, sugar: 8, potassium: 780, calcium: 220, iron: 1.8, vitaminC: 60 },
     prep: "15 min", cook: "6 min", makes: 2,
     ingredients: [
@@ -1473,7 +1473,7 @@ export const RECIPES = [
     name: "Merluza a la Plancha con Pisto",
     blurb: "Seared hake over a slow cooked vegetable base.",
     image: "/images/Cookbook/es-merluza-plancha.jpg",
-    macros: { calories: 300, protein: 38, carbs: 18, fat: 9 },
+    macros: { calories: 275, protein: 31, carbs: 18, fat: 9 },
     micros: { fiber: 5, sodium: 480, sugar: 9, potassium: 1080, calcium: 70, iron: 1.6, vitaminC: 90 },
     prep: "15 min", cook: "40 min", makes: 4,
     ingredients: [
@@ -1604,11 +1604,6 @@ export const RECIPES = [
 /* Helper: pull every recipe for one cuisine id. */
 export function recipesByCuisine(cuisineId) {
   return RECIPES.filter((r) => r.cuisine === cuisineId);
-}
-
-/* Helper: count per cuisine, used on the landing cards. */
-export function recipeCount(cuisineId) {
-  return RECIPES.filter((r) => r.cuisine === cuisineId).length;
 }
 
 /* Helper: look one up by id. Used by the tracker when logging a recipe. */

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import AuthedNav from "../components/AuthedNav";
 import Reveal from "../components/Reveal";
-import { CUISINES, recipesByCuisine, recipeCount } from "../lib/recipes";
-import { MACRO_FIELDS, MICRO_FIELDS } from "../lib/nutrition";
+import { CUISINES, recipesByCuisine } from "../lib/recipes";
+import { MACRO_FIELDS, MICRO_FIELDS, nutritionFromRecipe } from "../lib/nutrition";
 
 export default function Cookbook() {
   // Two levels of drill down. null at both = the cuisine grid.
@@ -60,6 +60,45 @@ export default function Cookbook() {
   );
 }
 
+/* ─── RECIPE IMAGE ───────────────────────────────────────────────────── */
+/* Every recipe points at /images/Cookbook/<id>.jpg. Those files are not in the
+   repo yet, so until they are, a failed load falls back to a tinted tile
+   rather than a broken-image icon. Dropping the real photos into
+   public/images/Cookbook/ needs no code change — they simply stop erroring. */
+function RecipeImage({ recipe, cuisine, className, decorative }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    /* Hue is derived from the cuisine id so each section reads distinctly,
+       while staying inside the site's dark palette. */
+    const hue = [...recipe.cuisine].reduce((h, c) => h + c.charCodeAt(0), 0) % 360;
+    return (
+      <div
+        className={`${className} cook-img-fallback`}
+        style={{ "--fallback-hue": hue }}
+        role={decorative ? undefined : "img"}
+        aria-label={decorative ? undefined : recipe.name}
+        aria-hidden={decorative ? "true" : undefined}
+      >
+        <span className="cook-img-fallback-text">
+          {cuisine?.name || recipe.cuisine.replace("-", " ")}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      className={className}
+      src={recipe.image}
+      alt={decorative ? "" : recipe.name}
+      aria-hidden={decorative ? "true" : undefined}
+      loading="lazy"
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
 /* ─── LANDING: cuisine grid ──────────────────────────────────────────── */
 function CuisineGrid({ onOpen }) {
   return (
@@ -77,9 +116,6 @@ function CuisineGrid({ onOpen }) {
         {CUISINES.map((c, i) => (
           <Reveal key={c.id} delay={i * 40}>
             <button className="cook-card" onClick={() => onOpen(c)}>
-              <span className="cook-card-count">
-                {String(recipeCount(c.id)).padStart(2, "0")}
-              </span>
               <span className="cook-card-name">{c.name}</span>
               <span className="cook-card-note">{c.note}</span>
               <span className="cook-card-arrow" aria-hidden="true">→</span>
@@ -105,29 +141,36 @@ function RecipeList({ cuisine, onOpen }) {
         </p>
       </Reveal>
 
+      {/* Without this the chips read as batch totals, since "Makes 4" sits
+          right beside them. The detail view says so too, but by then the
+          reader has already done the division. */}
+      <p className="cook-unit-note">Nutrition shown per serving.</p>
+
       <div className="cook-list">
-        {list.map((r, i) => (
-          <Reveal key={r.id} delay={i * 50}>
-            <button className="cook-row" onClick={() => onOpen(r)}>
-              <img
-                className="cook-row-img"
-                src={r.image}
-                alt=""
-                loading="lazy"
-                aria-hidden="true"
-              />
-              <div className="cook-row-main">
-                <span className="cook-row-name">{r.name}</span>
-                <span className="cook-row-blurb">{r.blurb}</span>
-              </div>
-              <div className="cook-row-meta">
-                <span className="cook-chip">{r.macros.calories} cal</span>
-                <span className="cook-chip is-accent">{r.macros.protein}g protein</span>
-                <span className="cook-chip">Makes {r.makes}</span>
-              </div>
-            </button>
-          </Reveal>
-        ))}
+        {list.map((r, i) => {
+          const n = nutritionFromRecipe(r);
+          return (
+            <Reveal key={r.id} delay={i * 50}>
+              <button className="cook-row" onClick={() => onOpen(r)}>
+                <RecipeImage
+                  recipe={r}
+                  cuisine={cuisine}
+                  className="cook-row-img"
+                  decorative
+                />
+                <div className="cook-row-main">
+                  <span className="cook-row-name">{r.name}</span>
+                  <span className="cook-row-blurb">{r.blurb}</span>
+                </div>
+                <div className="cook-row-meta">
+                  <span className="cook-chip">{n.calories} cal</span>
+                  <span className="cook-chip is-accent">{n.protein}g protein</span>
+                  <span className="cook-chip">Makes {r.makes}</span>
+                </div>
+              </button>
+            </Reveal>
+          );
+        })}
       </div>
     </>
   );
@@ -135,7 +178,8 @@ function RecipeList({ cuisine, onOpen }) {
 
 /* ─── LEVEL 3: a single recipe ───────────────────────────────────────── */
 function RecipeDetail({ recipe, cuisine }) {
-  const m = recipe.macros;
+  /* Same helper the calculator uses, so both read the recipe identically. */
+  const n = nutritionFromRecipe(recipe);
 
   return (
     <article className="cook-recipe">
@@ -146,7 +190,7 @@ function RecipeDetail({ recipe, cuisine }) {
       </Reveal>
 
       <Reveal delay={40}>
-        <img className="cook-hero" src={recipe.image} alt={recipe.name} />
+        <RecipeImage recipe={recipe} cuisine={cuisine} className="cook-hero" />
       </Reveal>
 
       <Reveal delay={60}>
@@ -158,7 +202,7 @@ function RecipeDetail({ recipe, cuisine }) {
             <Macro
               key={f.key}
               label={f.label}
-              value={m[f.key]}
+              value={n[f.key]}
               unit={f.unit}
               accent={f.accent}
             />
@@ -172,7 +216,7 @@ function RecipeDetail({ recipe, cuisine }) {
             <div className="cook-micro" key={f.key}>
               <span className="cook-micro-label">{f.label}</span>
               <span className="cook-micro-value">
-                {recipe.micros[f.key]}
+                {n[f.key]}
                 <em>{f.unit}</em>
               </span>
             </div>

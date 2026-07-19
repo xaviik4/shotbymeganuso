@@ -487,11 +487,6 @@ footer { background: #060606; border-top: 1px solid #232323; padding: 44px 48px;
   transition: border-color 0.25s, background 0.25s, transform 0.25s;
 }
 .cook-card:hover { border-color: #FF4D00; background: #151515; transform: translateY(-3px); }
-.cook-card-count {
-  display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px;
-  letter-spacing: 2px; color: #444; margin-bottom: 14px; transition: color 0.25s;
-}
-.cook-card:hover .cook-card-count { color: #FF4D00; }
 .cook-card-name {
   display: block; font-family: 'Bebas Neue', sans-serif; font-size: 28px;
   letter-spacing: 2px; line-height: 1.05; color: #F2F0EB; margin-bottom: 8px;
@@ -619,6 +614,26 @@ footer { background: #060606; border-top: 1px solid #232323; padding: 44px 48px;
   font-family: 'JetBrains Mono', monospace; font-size: 10px;
   letter-spacing: 2px; text-transform: uppercase; color: #A0A0A0; margin-bottom: 14px;
 }
+
+/* Stand-in for a recipe photo until the real files land in
+   public/images/Cookbook/. Sized by .cook-row-img / .cook-hero, so it drops
+   into the same slot without shifting the layout. --fallback-hue is set
+   per cuisine from the component. */
+.cook-img-fallback {
+  display: flex; align-items: center; justify-content: center;
+  padding: 8px; text-align: center; overflow: hidden;
+  background:
+    linear-gradient(135deg,
+      hsl(var(--fallback-hue, 20) 24% 12%) 0%,
+      #141414 55%,
+      hsl(var(--fallback-hue, 20) 18% 9%) 100%);
+}
+.cook-img-fallback-text {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  letter-spacing: 2px; text-transform: uppercase; color: #6A6A6A;
+  line-height: 1.5;
+}
+.cook-hero.cook-img-fallback .cook-img-fallback-text { font-size: 11px; letter-spacing: 3px; }
 .cook-micros {
   display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-bottom: 20px;
 }
@@ -654,26 +669,6 @@ footer { background: #060606; border-top: 1px solid #232323; padding: 44px 48px;
   border-radius: 2px; margin-bottom: 22px;
 }
 
-/* Day switcher */
-.track-daybar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
-.track-daynav {
-  background: none; border: 1px solid #232323; color: #A0A0A0;
-  width: 34px; height: 34px; border-radius: 2px; cursor: pointer;
-  font-size: 14px; transition: border-color 0.2s, color 0.2s;
-}
-.track-daynav:hover:not(:disabled) { border-color: #FF4D00; color: #FF4D00; }
-.track-daynav:disabled { opacity: 0.35; cursor: not-allowed; }
-.track-day {
-  font-family: 'Bebas Neue', sans-serif; font-size: 22px;
-  letter-spacing: 2px; color: #F2F0EB; min-width: 220px;
-}
-.track-today {
-  background: none; border: none; cursor: pointer; padding: 0;
-  font-family: 'JetBrains Mono', monospace; font-size: 10px;
-  letter-spacing: 2px; text-transform: uppercase; color: #FF4D00;
-}
-.track-today:hover { text-decoration: underline; }
-
 /* Panels */
 .track-panel {
   background: #101010; border: 1px solid #232323; border-radius: 6px;
@@ -691,8 +686,8 @@ footer { background: #060606; border-top: 1px solid #232323; padding: 44px 48px;
 .track-edit:hover { border-color: #FF4D00; color: #FF4D00; }
 
 /* Macro dials */
-.track-macros { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
-@media (max-width: 720px) { .track-macros { grid-template-columns: repeat(2, 1fr); } }
+.track-macros { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+@media (max-width: 560px) { .track-macros { grid-template-columns: 1fr; } }
 .track-dial {
   background: #151515; border: 1px solid #232323; border-radius: 4px; padding: 18px 18px 16px;
 }
@@ -726,24 +721,6 @@ footer { background: #060606; border-top: 1px solid #232323; padding: 44px 48px;
 .track-bar-fill.is-over { background: #FF3B30; }
 .track-bar-fill.is-met { background: #22c55e; }
 
-/* Micronutrient rows */
-.track-micros {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
-  padding-top: 24px; border-top: 1px solid #232323;
-}
-@media (max-width: 860px) { .track-micros { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .track-micros { grid-template-columns: 1fr; } }
-.track-micro-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 8px; }
-.track-micro-label {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px;
-  letter-spacing: 1.5px; text-transform: uppercase; color: #F2F0EB;
-}
-.track-micro-value, .track-micro-left {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px;
-  letter-spacing: 1px; color: #A0A0A0;
-}
-.track-micro-left { display: block; margin-top: 6px; }
-
 /* Adders */
 .track-adders { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
 @media (max-width: 900px) { .track-adders { grid-template-columns: 1fr; } }
@@ -771,17 +748,10 @@ footer { background: #060606; border-top: 1px solid #232323; padding: 44px 48px;
 .track-form-actions { display: flex; gap: 12px; align-items: stretch; }
 .track-form-actions .track-submit { width: auto; flex: 1; }
 
-/* Target editor + manual entry grids */
-.track-target-grid, .track-manual-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px;
+/* Calories + protein side by side in the quick-add form */
+.track-quick-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 8px;
 }
-.track-manual-grid { grid-template-columns: repeat(3, 1fr); }
-@media (max-width: 900px) { .track-target-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 640px) {
-  .track-target-grid, .track-manual-grid { grid-template-columns: repeat(2, 1fr); }
-}
-.track-target-field { margin-bottom: 0; }
-.track-target-field .form-input { padding: 10px 12px; font-size: 13px; }
 
 /* Logged entries */
 .track-entries { margin-top: 32px; }

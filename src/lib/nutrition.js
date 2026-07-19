@@ -25,26 +25,16 @@ export const MICRO_FIELDS = [
   { key: "vitaminC",  label: "Vitamin C", unit: "mg" },
 ];
 
-export const ALL_FIELDS = [...MACRO_FIELDS, ...MICRO_FIELDS];
+/* Every nutrient key. The cookbook shows all of them on a recipe. */
+export const NUTRIENT_KEYS = [...MACRO_FIELDS, ...MICRO_FIELDS].map((f) => f.key);
 
-/* Every nutrient key, used for zeroing totals and validating form input. */
-export const NUTRIENT_KEYS = ALL_FIELDS.map((f) => f.key);
-
-/* Starting targets for a cut. Adjustable in the tracker and stored per user.
-   Sodium and sugar are ceilings, the rest are floors to reach. */
-export const DEFAULT_TARGETS = {
-  calories: 2100,
-  protein: 180,
-  carbs: 180,
-  fat: 60,
-  fiber: 30,
-  sugar: 45,
-  sodium: 2300,
-  potassium: 3400,
-  calcium: 1000,
-  iron: 18,
-  vitaminC: 90,
-};
+/* What the calculator actually adds up. Everything else is still stored on the
+   recipes and still shown in the cookbook — it just isn't what you count when
+   you are watching calories and protein. */
+export const CALC_FIELDS = MACRO_FIELDS.filter(
+  (f) => f.key === "calories" || f.key === "protein"
+);
+export const CALC_KEYS = CALC_FIELDS.map((f) => f.key);
 
 /* Snapshot a recipe's per serving nutrition into a flat object.
    Flat is what the tracker stores and what the manual form produces, so
@@ -57,31 +47,31 @@ export function nutritionFromRecipe(recipe) {
   return flat;
 }
 
-/* An all zero nutrition object, the base for an empty log. */
-export function emptyTotals() {
+/* An all zero nutrition object, the base for an empty list. */
+export function emptyTotals(keys = NUTRIENT_KEYS) {
   const t = {};
-  for (const key of NUTRIENT_KEYS) t[key] = 0;
+  for (const key of keys) t[key] = 0;
   return t;
 }
 
-/* Sum a day's entries. Each entry holds PER SERVING values plus a servings
+/* Sum a list of entries. Each entry holds PER SERVING values plus a servings
    count, so the multiply happens here and nowhere else. */
-export function sumEntries(entries) {
-  const totals = emptyTotals();
+export function sumEntries(entries, keys = NUTRIENT_KEYS) {
+  const totals = emptyTotals(keys);
   for (const entry of entries) {
     const servings = Number(entry.servings) || 0;
-    for (const key of NUTRIENT_KEYS) {
+    for (const key of keys) {
       totals[key] += (Number(entry[key]) || 0) * servings;
     }
   }
   // Round once at the end so repeated fractional servings do not drift.
-  for (const key of NUTRIENT_KEYS) totals[key] = round(totals[key]);
+  for (const key of keys) totals[key] = round(totals[key]);
   return totals;
 }
 
 /* Totals for a single entry, used for the per row readout. */
-export function entryTotals(entry) {
-  return sumEntries([entry]);
+export function entryTotals(entry, keys = NUTRIENT_KEYS) {
+  return sumEntries([entry], keys);
 }
 
 /* One decimal place, and drop a trailing .0 so whole numbers read clean. */
@@ -89,35 +79,6 @@ export function round(n) {
   return Math.round((Number(n) || 0) * 10) / 10;
 }
 
-/* Percentage of target consumed, clamped to 100 for bar width. */
-export function pctOfTarget(consumed, target) {
-  if (!target) return 0;
-  return Math.min(100, Math.round((consumed / target) * 100));
-}
-
-/* Local calendar date as YYYY-MM-DD. Deliberately local, not UTC, so the day
-   rolls over at the user's midnight rather than somewhere in the Atlantic. */
-export function todayKey(date = new Date()) {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, "0");
-  const d = String(date.getDate()).padStart(2, "0");
-  return `${y}-${m}-${d}`;
-}
-
-/* Readable form of a date key, for the tracker header. */
-export function formatDayLabel(key) {
-  const [y, m, d] = key.split("-").map(Number);
-  return new Date(y, m - 1, d).toLocaleDateString(undefined, {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-  });
-}
-
-/* Shift a date key by N days. Powers the previous and next day arrows. */
-export function shiftDay(key, delta) {
-  const [y, m, d] = key.split("-").map(Number);
-  const date = new Date(y, m - 1, d);
-  date.setDate(date.getDate() + delta);
-  return todayKey(date);
-}
+/* The day helpers and target math that used to live here went with the daily
+   log. The calculator keeps a running total for the current session only, so
+   there is no date key to compute and no target to measure against. */

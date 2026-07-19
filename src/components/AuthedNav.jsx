@@ -16,7 +16,7 @@ export default function AuthedNav() {
 
   return (
     <header className="portal-nav">
-      <Link to="/cookbook" className="portal-logo">
+      <Link to="/portal" className="portal-logo">
         <span className="rec-dot portal-logo-dot" aria-hidden="true"></span>
         SHOTBYMEGANUSO
       </Link>
@@ -36,7 +36,7 @@ export default function AuthedNav() {
             `portal-navlink${isActive ? " is-active" : ""}`
           }
         >
-          Tracker
+          Calculator
         </NavLink>
         <NavLink
           to="/dashboard"

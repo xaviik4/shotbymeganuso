@@ -11,7 +11,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   // Already authenticated — skip the login page entirely
-  if (session) return <Navigate to="/cookbook" replace />;
+  if (session) return <Navigate to="/portal" replace />;
 
   // session === undefined means Supabase is still resolving.
   // Render nothing to avoid a brief flash of the login form
@@ -34,7 +34,7 @@ export default function Login() {
       );
       setLoading(false);
     } else {
-      navigate("/cookbook", { replace: true });
+      navigate("/portal", { replace: true });
     }
   }
 

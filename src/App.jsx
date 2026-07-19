@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Cookbook from "./pages/Cookbook";
 import Tracker from "./pages/Tracker";
 import Dashboard from "./pages/Dashboard";
+import Portal from "./pages/Portal";
 import WorkPage from "./pages/WorkPage";
 import Pricing from "./pages/Pricing";
 
@@ -84,6 +85,7 @@ export default function App() {
 
           {/* ── Protected: private tools (no Nav/Footer, hidden from public nav) ── */}
           <Route element={<ProtectedRoute />}>
+            <Route path="/portal" element={<Portal />} />
             <Route path="/cookbook" element={<Cookbook />} />
             <Route path="/tracker" element={<Tracker />} />
             <Route path="/dashboard" element={<Dashboard />} />
