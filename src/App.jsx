@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Cookbook from "./pages/Cookbook";
 import Tracker from "./pages/Tracker";
+import Dashboard from "./pages/Dashboard";
 import WorkPage from "./pages/WorkPage";
 import Pricing from "./pages/Pricing";
 
@@ -85,6 +86,7 @@ export default function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/cookbook" element={<Cookbook />} />
             <Route path="/tracker" element={<Tracker />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Route>
         </Routes>
       </AuthProvider>

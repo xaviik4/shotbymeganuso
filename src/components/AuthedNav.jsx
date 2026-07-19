@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 
 /**
  * Shared header for every page behind the auth gate.
- * Keeps the private tools (Cookbook, Tracker) on one consistent shell.
+ * Keeps the private tools (Cookbook, Tracker, Dashboard) on one consistent shell.
  */
 export default function AuthedNav() {
   const { signOut } = useAuth();
@@ -37,6 +37,14 @@ export default function AuthedNav() {
           }
         >
           Tracker
+        </NavLink>
+        <NavLink
+          to="/dashboard"
+          className={({ isActive }) =>
+            `portal-navlink${isActive ? " is-active" : ""}`
+          }
+        >
+          Dashboard
         </NavLink>
         <button className="portal-signout" onClick={handleSignOut}>
           Sign Out
