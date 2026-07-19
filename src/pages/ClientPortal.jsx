@@ -18,9 +18,14 @@ export default function ClientPortal() {
           <span className="rec-dot portal-logo-dot" aria-hidden="true"></span>
           SHOTBYMEGANUSO
         </Link>
-        <button className="portal-signout" onClick={handleSignOut}>
-          Sign Out
-        </button>
+        <div className="portal-nav-actions">
+          <Link to="/cookbook" className="portal-navlink">
+            Cookbook
+          </Link>
+          <button className="portal-signout" onClick={handleSignOut}>
+            Sign Out
+          </button>
+        </div>
       </header>
 
       {/* Portal content */}
@@ -37,6 +42,16 @@ export default function ClientPortal() {
           <div className="portal-placeholder-icon" aria-hidden="true">🎞️</div>
           <p className="portal-placeholder-text">No deliverables yet · Check back soon</p>
         </div>
+
+        {/* Private tools */}
+        <Link to="/cookbook" className="portal-tile">
+          <span className="portal-tile-label">Private</span>
+          <span className="portal-tile-name">Cookbook</span>
+          <span className="portal-tile-desc">
+            Cutting friendly recipes across 16 cuisines, organized and portioned.
+          </span>
+          <span className="portal-tile-arrow" aria-hidden="true">→</span>
+        </Link>
 
         {/* Logged-in user indicator */}
         {session?.user?.email && (
