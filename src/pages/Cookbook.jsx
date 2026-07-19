@@ -1,21 +1,13 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import AuthedNav from "../components/AuthedNav";
 import Reveal from "../components/Reveal";
 import { CUISINES, recipesByCuisine, recipeCount } from "../lib/recipes";
+import { MACRO_FIELDS, MICRO_FIELDS } from "../lib/nutrition";
 
 export default function Cookbook() {
-  const { signOut } = useAuth();
-  const navigate = useNavigate();
-
   // Two levels of drill down. null at both = the cuisine grid.
   const [cuisine, setCuisine] = useState(null);
   const [recipe, setRecipe] = useState(null);
-
-  async function handleSignOut() {
-    await signOut();
-    navigate("/login", { replace: true });
-  }
 
   function openCuisine(c) {
     setCuisine(c);
@@ -30,16 +22,7 @@ export default function Cookbook() {
 
   return (
     <div className="portal-page">
-      {/* Reuses the portal nav so the authed area stays consistent */}
-      <header className="portal-nav">
-        <Link to="/clients" className="portal-logo">
-          <span className="rec-dot portal-logo-dot" aria-hidden="true"></span>
-          SHOTBYMEGANUSO
-        </Link>
-        <button className="portal-signout" onClick={handleSignOut}>
-          Sign Out
-        </button>
-      </header>
+      <AuthedNav />
 
       <main className="portal-body cook-body">
         {/* Breadcrumb doubles as the back navigation */}
@@ -126,6 +109,13 @@ function RecipeList({ cuisine, onOpen }) {
         {list.map((r, i) => (
           <Reveal key={r.id} delay={i * 50}>
             <button className="cook-row" onClick={() => onOpen(r)}>
+              <img
+                className="cook-row-img"
+                src={r.image}
+                alt=""
+                loading="lazy"
+                aria-hidden="true"
+              />
               <div className="cook-row-main">
                 <span className="cook-row-name">{r.name}</span>
                 <span className="cook-row-blurb">{r.blurb}</span>
@@ -133,7 +123,7 @@ function RecipeList({ cuisine, onOpen }) {
               <div className="cook-row-meta">
                 <span className="cook-chip">{r.macros.calories} cal</span>
                 <span className="cook-chip is-accent">{r.macros.protein}g protein</span>
-                <span className="cook-chip">{r.cook}</span>
+                <span className="cook-chip">Makes {r.makes}</span>
               </div>
             </button>
           </Reveal>
@@ -155,12 +145,38 @@ function RecipeDetail({ recipe, cuisine }) {
         <p className="portal-sub">{recipe.blurb}</p>
       </Reveal>
 
+      <Reveal delay={40}>
+        <img className="cook-hero" src={recipe.image} alt={recipe.name} />
+      </Reveal>
+
       <Reveal delay={60}>
+        <p className="cook-unit-note">
+          Per serving. This batch makes {recipe.makes} servings. Values are estimates.
+        </p>
         <div className="cook-macros">
-          <Macro label="Calories" value={m.calories} unit="kcal" accent />
-          <Macro label="Protein" value={m.protein} unit="g" accent />
-          <Macro label="Carbs" value={m.carbs} unit="g" />
-          <Macro label="Fat" value={m.fat} unit="g" />
+          {MACRO_FIELDS.map((f) => (
+            <Macro
+              key={f.key}
+              label={f.label}
+              value={m[f.key]}
+              unit={f.unit}
+              accent={f.accent}
+            />
+          ))}
+        </div>
+      </Reveal>
+
+      <Reveal delay={80}>
+        <div className="cook-micros">
+          {MICRO_FIELDS.map((f) => (
+            <div className="cook-micro" key={f.key}>
+              <span className="cook-micro-label">{f.label}</span>
+              <span className="cook-micro-value">
+                {recipe.micros[f.key]}
+                <em>{f.unit}</em>
+              </span>
+            </div>
+          ))}
         </div>
       </Reveal>
 
@@ -168,7 +184,7 @@ function RecipeDetail({ recipe, cuisine }) {
         <div className="cook-times">
           <span className="cook-time"><em>Prep</em> {recipe.prep}</span>
           <span className="cook-time"><em>Cook</em> {recipe.cook}</span>
-          <span className="cook-time"><em>Serves</em> {recipe.serves}</span>
+          <span className="cook-time"><em>Makes</em> {recipe.makes} servings</span>
         </div>
       </Reveal>
 

@@ -9,7 +9,7 @@ import { useAuth } from "../context/AuthContext";
  *
  * Usage in App.jsx:
  *   <Route element={<ProtectedRoute />}>
- *     <Route path="/clients" element={<ClientPortal />} />
+ *     <Route path="/cookbook" element={<Cookbook />} />
  *   </Route>
  */
 export default function ProtectedRoute() {
@@ -19,7 +19,7 @@ export default function ProtectedRoute() {
   // Render nothing so we never flash the login page for an authenticated user.
   if (session === undefined) return null;
 
-  // No session — hard redirect. `replace` removes /clients from history
+  // No session — hard redirect. `replace` removes the private route from history
   // so the back button doesn't loop them back to a protected route.
   if (!session) return <Navigate to="/login" replace />;
 

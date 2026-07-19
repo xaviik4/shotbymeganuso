@@ -6,8 +6,8 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import ClientPortal from "./pages/ClientPortal";
 import Cookbook from "./pages/Cookbook";
+import Tracker from "./pages/Tracker";
 import WorkPage from "./pages/WorkPage";
 import Pricing from "./pages/Pricing";
 
@@ -81,10 +81,10 @@ export default function App() {
           {/* ── Public: login page (no Nav/Footer) ── */}
           <Route path="/login" element={<Login />} />
 
-          {/* ── Protected: client portal + cookbook (no Nav/Footer, hidden from nav) ── */}
+          {/* ── Protected: private tools (no Nav/Footer, hidden from public nav) ── */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/clients" element={<ClientPortal />} />
             <Route path="/cookbook" element={<Cookbook />} />
+            <Route path="/tracker" element={<Tracker />} />
           </Route>
         </Routes>
       </AuthProvider>

@@ -1,7 +1,16 @@
 /* ─── COOKBOOK ─────────────────────────────────────────────────────── */
 /* Private recipe collection. Every recipe is built for a cut: high protein,
    calorie conscious, whole food ingredients, portioned per serving.
-   Macros are per serving. */
+
+   Built for meal prep. Each recipe `makes` a batch of N servings, and both
+   `macros` and `micros` are stored PER SERVING, never per batch. That is the
+   unit the tracker multiplies by servings eaten, so keep it that way.
+
+   All nutrition values are estimates.
+
+   `image` paths are placeholders under /public/images/Cookbook/ and follow the
+   same convention as the portfolio items in constants.js. Swap them any time,
+   the filename matches the recipe id. */
 
 export const CUISINES = [
   { id: "puerto-rican",   name: "Puerto Rican",   note: "Sofrito, citrus, adobo" },
@@ -29,8 +38,10 @@ export const RECIPES = [
     cuisine: "puerto-rican",
     name: "Pollo Guisado Ligero",
     blurb: "The classic braise with the skin off and the oil cut back.",
+    image: "/images/Cookbook/pr-pollo-guisado.jpg",
     macros: { calories: 405, protein: 47, carbs: 26, fat: 12 },
-    prep: "15 min", cook: "35 min", serves: 4,
+    micros: { fiber: 3, sodium: 720, sugar: 4, potassium: 980, calcium: 45, iron: 3.1, vitaminC: 22 },
+    prep: "15 min", cook: "35 min", makes: 4,
     ingredients: [
       "2 lb boneless skinless chicken thighs, trimmed",
       "1/4 cup sofrito",
@@ -59,8 +70,10 @@ export const RECIPES = [
     cuisine: "puerto-rican",
     name: "Bistec Encebollado",
     blurb: "Thin steak and onions in vinegar and garlic. Fifteen minutes start to finish.",
+    image: "/images/Cookbook/pr-bistec-encebollado.jpg",
     macros: { calories: 340, protein: 42, carbs: 11, fat: 14 },
-    prep: "20 min", cook: "12 min", serves: 4,
+    micros: { fiber: 2, sodium: 580, sugar: 5, potassium: 760, calcium: 40, iron: 3.4, vitaminC: 9 },
+    prep: "20 min", cook: "12 min", makes: 4,
     ingredients: [
       "1.5 lb top round steak, sliced thin against the grain",
       "2 large yellow onions, sliced into rings",
@@ -87,8 +100,10 @@ export const RECIPES = [
     cuisine: "puerto-rican",
     name: "Arroz con Gandules de Coliflor",
     blurb: "Cauliflower rice standing in for the real thing. The sofrito does the work.",
+    image: "/images/Cookbook/pr-arroz-gandules-coliflor.jpg",
     macros: { calories: 290, protein: 31, carbs: 18, fat: 11 },
-    prep: "10 min", cook: "18 min", serves: 4,
+    micros: { fiber: 7, sodium: 690, sugar: 6, potassium: 900, calcium: 70, iron: 2.6, vitaminC: 66 },
+    prep: "10 min", cook: "18 min", makes: 4,
     ingredients: [
       "1 lb ground chicken breast",
       "24 oz riced cauliflower, fresh or thawed",
@@ -117,8 +132,10 @@ export const RECIPES = [
     cuisine: "cuban",
     name: "Ropa Vieja Magra",
     blurb: "Flank steak shredded into peppers and tomato. Batch cook it on Sunday.",
+    image: "/images/Cookbook/cu-ropa-vieja.jpg",
     macros: { calories: 375, protein: 44, carbs: 19, fat: 13 },
-    prep: "15 min", cook: "2 hr", serves: 6,
+    micros: { fiber: 3, sodium: 640, sugar: 6, potassium: 950, calcium: 60, iron: 3.8, vitaminC: 78 },
+    prep: "15 min", cook: "2 hr", makes: 6,
     ingredients: [
       "2.5 lb flank steak, trimmed of visible fat",
       "1 tbsp olive oil",
@@ -149,8 +166,10 @@ export const RECIPES = [
     cuisine: "cuban",
     name: "Pollo a la Plancha con Mojo",
     blurb: "Pressed chicken breast under a garlic citrus mojo. The leanest thing in the book.",
+    image: "/images/Cookbook/cu-pollo-plancha-mojo.jpg",
     macros: { calories: 300, protein: 52, carbs: 6, fat: 8 },
-    prep: "30 min", cook: "10 min", serves: 4,
+    micros: { fiber: 1, sodium: 420, sugar: 3, potassium: 720, calcium: 30, iron: 1.3, vitaminC: 30 },
+    prep: "30 min", cook: "10 min", makes: 4,
     ingredients: [
       "4 chicken breasts (6 oz each), butterflied thin",
       "1/2 cup fresh orange juice",
@@ -176,8 +195,10 @@ export const RECIPES = [
     cuisine: "cuban",
     name: "Picadillo de Pavo",
     blurb: "Ground turkey picadillo. Raisins and olives keep it honest.",
+    image: "/images/Cookbook/cu-picadillo.jpg",
     macros: { calories: 330, protein: 40, carbs: 20, fat: 10 },
-    prep: "10 min", cook: "25 min", serves: 4,
+    micros: { fiber: 3, sodium: 690, sugar: 8, potassium: 780, calcium: 50, iron: 2.6, vitaminC: 40 },
+    prep: "10 min", cook: "25 min", makes: 4,
     ingredients: [
       "1.5 lb 93% lean ground turkey",
       "1 tbsp olive oil",
@@ -209,8 +230,10 @@ export const RECIPES = [
     cuisine: "french",
     name: "Poulet au Vinaigre",
     blurb: "Chicken in a sharp vinegar pan sauce. No cream, no butter mountain.",
+    image: "/images/Cookbook/fr-poulet-vinaigre.jpg",
     macros: { calories: 355, protein: 48, carbs: 7, fat: 14 },
-    prep: "10 min", cook: "30 min", serves: 4,
+    micros: { fiber: 1, sodium: 560, sugar: 2, potassium: 640, calcium: 35, iron: 2.2, vitaminC: 6 },
+    prep: "10 min", cook: "30 min", makes: 4,
     ingredients: [
       "8 boneless skinless chicken thighs",
       "1 tbsp olive oil",
@@ -239,8 +262,10 @@ export const RECIPES = [
     cuisine: "french",
     name: "Salade Nicoise au Thon Saisi",
     blurb: "Seared tuna instead of canned. Built as a full meal, not a side.",
+    image: "/images/Cookbook/fr-salade-nicoise.jpg",
     macros: { calories: 420, protein: 46, carbs: 24, fat: 16 },
-    prep: "15 min", cook: "12 min", serves: 2,
+    micros: { fiber: 5, sodium: 520, sugar: 6, potassium: 1150, calcium: 90, iron: 3, vitaminC: 38 },
+    prep: "15 min", cook: "12 min", makes: 2,
     ingredients: [
       "2 ahi tuna steaks (6 oz each)",
       "8 oz baby potatoes, halved",
@@ -270,8 +295,10 @@ export const RECIPES = [
     cuisine: "french",
     name: "Cabillaud en Papillote",
     blurb: "Cod steamed in parchment. Zero added fat and nothing to clean.",
+    image: "/images/Cookbook/fr-cabillaud-papillote.jpg",
     macros: { calories: 260, protein: 40, carbs: 12, fat: 6 },
-    prep: "10 min", cook: "18 min", serves: 2,
+    micros: { fiber: 4, sodium: 380, sugar: 4, potassium: 980, calcium: 80, iron: 1.2, vitaminC: 22 },
+    prep: "10 min", cook: "18 min", makes: 2,
     ingredients: [
       "2 cod fillets (6 oz each)",
       "1 leek, white part only, sliced thin",
@@ -299,8 +326,10 @@ export const RECIPES = [
     cuisine: "thai",
     name: "Larb Gai",
     blurb: "Chicken larb. Almost no fat and it still hits harder than most things.",
+    image: "/images/Cookbook/th-larb-gai.jpg",
     macros: { calories: 285, protein: 45, carbs: 10, fat: 7 },
-    prep: "15 min", cook: "10 min", serves: 4,
+    micros: { fiber: 2, sodium: 980, sugar: 3, potassium: 680, calcium: 45, iron: 1.8, vitaminC: 14 },
+    prep: "15 min", cook: "10 min", makes: 4,
     ingredients: [
       "1.5 lb ground chicken breast",
       "3 tbsp fish sauce",
@@ -330,8 +359,10 @@ export const RECIPES = [
     cuisine: "thai",
     name: "Tom Yum Goong",
     blurb: "Clear version, no coconut milk. A full bowl for under 200 calories.",
+    image: "/images/Cookbook/th-tom-yum-goong.jpg",
     macros: { calories: 185, protein: 28, carbs: 11, fat: 4 },
-    prep: "10 min", cook: "20 min", serves: 4,
+    micros: { fiber: 2, sodium: 1120, sugar: 4, potassium: 560, calcium: 80, iron: 1.5, vitaminC: 12 },
+    prep: "10 min", cook: "20 min", makes: 4,
     ingredients: [
       "1 lb large shrimp, peeled and deveined, shells reserved",
       "6 cups low sodium chicken broth",
@@ -360,8 +391,10 @@ export const RECIPES = [
     cuisine: "thai",
     name: "Pad Krapow Gai",
     blurb: "Thai basil chicken. Ten minutes and one pan.",
+    image: "/images/Cookbook/th-pad-krapow.jpg",
     macros: { calories: 310, protein: 44, carbs: 9, fat: 11 },
-    prep: "8 min", cook: "10 min", serves: 4,
+    micros: { fiber: 3, sodium: 940, sugar: 4, potassium: 700, calcium: 70, iron: 2.1, vitaminC: 12 },
+    prep: "8 min", cook: "10 min", makes: 4,
     ingredients: [
       "1.5 lb ground chicken breast",
       "1 tbsp avocado oil",
@@ -393,8 +426,10 @@ export const RECIPES = [
     cuisine: "indian",
     name: "Chicken Tikka",
     blurb: "Yogurt marinated and broiled. No cream sauce, all the spice.",
+    image: "/images/Cookbook/in-chicken-tikka.jpg",
     macros: { calories: 295, protein: 50, carbs: 8, fat: 7 },
-    prep: "4 hr", cook: "15 min", serves: 4,
+    micros: { fiber: 1, sodium: 680, sugar: 4, potassium: 720, calcium: 110, iron: 1.9, vitaminC: 6 },
+    prep: "4 hr", cook: "15 min", makes: 4,
     ingredients: [
       "2 lb chicken breast, cut into 2 inch cubes",
       "1 cup nonfat Greek yogurt",
@@ -423,8 +458,10 @@ export const RECIPES = [
     cuisine: "indian",
     name: "Chana Masala",
     blurb: "Chickpeas built out with fiber. Pair with a grilled protein on a heavy training day.",
+    image: "/images/Cookbook/in-chana-masala.jpg",
     macros: { calories: 265, protein: 14, carbs: 40, fat: 6 },
-    prep: "10 min", cook: "30 min", serves: 4,
+    micros: { fiber: 11, sodium: 420, sugar: 7, potassium: 640, calcium: 90, iron: 3.4, vitaminC: 14 },
+    prep: "10 min", cook: "30 min", makes: 4,
     ingredients: [
       "2 cans (15 oz each) chickpeas, drained and rinsed",
       "1 tbsp avocado oil",
@@ -456,8 +493,10 @@ export const RECIPES = [
     cuisine: "indian",
     name: "Tandoori Salmon with Raita",
     blurb: "Salmon under a dry spice crust with a cooling cucumber yogurt.",
+    image: "/images/Cookbook/in-tandoori-salmon.jpg",
     macros: { calories: 390, protein: 42, carbs: 9, fat: 20 },
-    prep: "30 min", cook: "12 min", serves: 4,
+    micros: { fiber: 1, sodium: 380, sugar: 5, potassium: 900, calcium: 140, iron: 1.1, vitaminC: 5 },
+    prep: "30 min", cook: "12 min", makes: 4,
     ingredients: [
       "4 salmon fillets (6 oz each)",
       "1/2 cup nonfat Greek yogurt",
@@ -489,8 +528,10 @@ export const RECIPES = [
     cuisine: "mexican",
     name: "Pollo Asado Bowl",
     blurb: "Citrus and achiote chicken over a built bowl. Meal prep anchor.",
+    image: "/images/Cookbook/mx-pollo-asado.jpg",
     macros: { calories: 425, protein: 51, carbs: 28, fat: 13 },
-    prep: "2 hr", cook: "15 min", serves: 4,
+    micros: { fiber: 11, sodium: 560, sugar: 5, potassium: 1180, calcium: 90, iron: 3.6, vitaminC: 26 },
+    prep: "2 hr", cook: "15 min", makes: 4,
     ingredients: [
       "2 lb boneless skinless chicken thighs",
       "1/3 cup fresh orange juice",
@@ -520,8 +561,10 @@ export const RECIPES = [
     cuisine: "mexican",
     name: "Camarones a la Diabla",
     blurb: "Shrimp in a toasted chile sauce. Twenty minutes, very low calorie.",
+    image: "/images/Cookbook/mx-camarones-diabla.jpg",
     macros: { calories: 245, protein: 38, carbs: 12, fat: 6 },
-    prep: "15 min", cook: "15 min", serves: 4,
+    micros: { fiber: 3, sodium: 720, sugar: 5, potassium: 520, calcium: 100, iron: 1.4, vitaminC: 30 },
+    prep: "15 min", cook: "15 min", makes: 4,
     ingredients: [
       "1.5 lb large shrimp, peeled and deveined",
       "4 guajillo chiles, stemmed and seeded",
@@ -550,8 +593,10 @@ export const RECIPES = [
     cuisine: "mexican",
     name: "Tinga de Pollo",
     blurb: "Shredded chicken in chipotle and tomato. Serve in lettuce cups.",
+    image: "/images/Cookbook/mx-tinga-pollo.jpg",
     macros: { calories: 280, protein: 46, carbs: 13, fat: 6 },
-    prep: "10 min", cook: "30 min", serves: 4,
+    micros: { fiber: 3, sodium: 620, sugar: 6, potassium: 820, calcium: 60, iron: 2, vitaminC: 18 },
+    prep: "10 min", cook: "30 min", makes: 4,
     ingredients: [
       "2 lb chicken breast",
       "1 tbsp avocado oil",
@@ -584,8 +629,10 @@ export const RECIPES = [
     cuisine: "japanese",
     name: "Sake Shioyaki",
     blurb: "Salt grilled salmon. Two ingredients and a technique.",
+    image: "/images/Cookbook/jp-salmon-shioyaki.jpg",
     macros: { calories: 340, protein: 40, carbs: 0, fat: 19 },
-    prep: "30 min", cook: "12 min", serves: 4,
+    micros: { fiber: 0, sodium: 640, sugar: 0, potassium: 780, calcium: 25, iron: 0.8, vitaminC: 4 },
+    prep: "30 min", cook: "12 min", makes: 4,
     ingredients: [
       "4 salmon fillets (6 oz each), skin on",
       "2 tsp kosher salt",
@@ -607,8 +654,10 @@ export const RECIPES = [
     cuisine: "japanese",
     name: "Chicken Teriyaki Donburi",
     blurb: "Teriyaki with the sugar cut down to a quarter of standard.",
+    image: "/images/Cookbook/jp-chicken-teriyaki.jpg",
     macros: { calories: 400, protein: 48, carbs: 32, fat: 9 },
-    prep: "10 min", cook: "18 min", serves: 4,
+    micros: { fiber: 5, sodium: 820, sugar: 9, potassium: 880, calcium: 90, iron: 2.4, vitaminC: 82 },
+    prep: "10 min", cook: "18 min", makes: 4,
     ingredients: [
       "2 lb boneless skinless chicken thighs",
       "1/4 cup low sodium soy sauce",
@@ -637,8 +686,10 @@ export const RECIPES = [
     cuisine: "japanese",
     name: "Miso Glazed Cod",
     blurb: "The famous one, scaled back on sugar. Marinate a day ahead.",
+    image: "/images/Cookbook/jp-miso-cod.jpg",
     macros: { calories: 265, protein: 39, carbs: 10, fat: 5 },
-    prep: "24 hr", cook: "10 min", serves: 4,
+    micros: { fiber: 1, sodium: 780, sugar: 7, potassium: 620, calcium: 40, iron: 0.7, vitaminC: 2 },
+    prep: "24 hr", cook: "10 min", makes: 4,
     ingredients: [
       "4 black cod or regular cod fillets (6 oz each)",
       "1/4 cup white miso paste",
@@ -664,8 +715,10 @@ export const RECIPES = [
     cuisine: "italian",
     name: "Chicken Piccata",
     blurb: "Lemon and caper pan sauce with one tablespoon of butter across four plates.",
+    image: "/images/Cookbook/it-chicken-piccata.jpg",
     macros: { calories: 320, protein: 50, carbs: 8, fat: 10 },
-    prep: "10 min", cook: "18 min", serves: 4,
+    micros: { fiber: 1, sodium: 620, sugar: 2, potassium: 700, calcium: 40, iron: 1.4, vitaminC: 8 },
+    prep: "10 min", cook: "18 min", makes: 4,
     ingredients: [
       "4 chicken breasts (6 oz each), pounded to 1/2 inch",
       "2 tbsp almond flour",
@@ -693,8 +746,10 @@ export const RECIPES = [
     cuisine: "italian",
     name: "Polpette di Tacchino",
     blurb: "Turkey meatballs in a plain tomato sauce. Freezes well.",
+    image: "/images/Cookbook/it-polpette-pomodoro.jpg",
     macros: { calories: 335, protein: 43, carbs: 16, fat: 11 },
-    prep: "15 min", cook: "35 min", serves: 4,
+    micros: { fiber: 4, sodium: 640, sugar: 9, potassium: 900, calcium: 150, iron: 3, vitaminC: 22 },
+    prep: "15 min", cook: "35 min", makes: 4,
     ingredients: [
       "1.5 lb 93% lean ground turkey",
       "1 egg",
@@ -724,8 +779,10 @@ export const RECIPES = [
     cuisine: "italian",
     name: "Insalata di Tonno e Fagioli",
     blurb: "No cooking at all. Assemble it in five minutes at your desk.",
+    image: "/images/Cookbook/it-tonno-fagioli.jpg",
     macros: { calories: 350, protein: 34, carbs: 30, fat: 11 },
-    prep: "10 min", cook: "0 min", serves: 2,
+    micros: { fiber: 9, sodium: 580, sugar: 4, potassium: 980, calcium: 120, iron: 3.6, vitaminC: 24 },
+    prep: "10 min", cook: "0 min", makes: 2,
     ingredients: [
       "2 cans (5 oz each) tuna in water, drained",
       "1 can (15 oz) cannellini beans, drained and rinsed",
@@ -754,8 +811,10 @@ export const RECIPES = [
     cuisine: "chinese",
     name: "Beef and Broccoli",
     blurb: "Velveted flank steak. Restaurant texture without the deep fry.",
+    image: "/images/Cookbook/cn-beef-broccoli.jpg",
     macros: { calories: 335, protein: 42, carbs: 16, fat: 11 },
-    prep: "20 min", cook: "12 min", serves: 4,
+    micros: { fiber: 4, sodium: 880, sugar: 4, potassium: 880, calcium: 80, iron: 3.2, vitaminC: 82 },
+    prep: "20 min", cook: "12 min", makes: 4,
     ingredients: [
       "1.5 lb flank steak, sliced thin against the grain",
       "1 tbsp cornstarch",
@@ -788,8 +847,10 @@ export const RECIPES = [
     cuisine: "chinese",
     name: "Ginger Scallion Steamed Fish",
     blurb: "Cantonese steamed fish. Lean, fast, and hard to overthink.",
+    image: "/images/Cookbook/cn-steamed-fish.jpg",
     macros: { calories: 250, protein: 38, carbs: 4, fat: 9 },
-    prep: "10 min", cook: "12 min", serves: 4,
+    micros: { fiber: 1, sodium: 700, sugar: 2, potassium: 720, calcium: 45, iron: 0.9, vitaminC: 6 },
+    prep: "10 min", cook: "12 min", makes: 4,
     ingredients: [
       "4 white fish fillets (6 oz each), sea bass or cod",
       "3 inch piece of ginger, julienned",
@@ -816,8 +877,10 @@ export const RECIPES = [
     cuisine: "chinese",
     name: "Kung Pao Chicken",
     blurb: "Cut back on peanuts and sugar, kept the numbing heat.",
+    image: "/images/Cookbook/cn-kung-pao.jpg",
     macros: { calories: 345, protein: 45, carbs: 14, fat: 12 },
-    prep: "15 min", cook: "12 min", serves: 4,
+    micros: { fiber: 2, sodium: 760, sugar: 4, potassium: 700, calcium: 40, iron: 1.9, vitaminC: 5 },
+    prep: "15 min", cook: "12 min", makes: 4,
     ingredients: [
       "1.5 lb chicken breast, cut into 3/4 inch cubes",
       "1 tbsp cornstarch",
@@ -851,8 +914,10 @@ export const RECIPES = [
     cuisine: "vietnamese",
     name: "Bun Ga Nuong",
     blurb: "Grilled lemongrass chicken over herbs and noodles. Heavy on the herbs.",
+    image: "/images/Cookbook/vn-bun-ga-nuong.jpg",
     macros: { calories: 415, protein: 46, carbs: 35, fat: 10 },
-    prep: "1 hr", cook: "15 min", serves: 4,
+    micros: { fiber: 3, sodium: 1020, sugar: 8, potassium: 780, calcium: 70, iron: 2.4, vitaminC: 14 },
+    prep: "1 hr", cook: "15 min", makes: 4,
     ingredients: [
       "2 lb boneless skinless chicken thighs",
       "3 stalks lemongrass, minced fine",
@@ -882,8 +947,10 @@ export const RECIPES = [
     cuisine: "vietnamese",
     name: "Pho Ga",
     blurb: "Chicken pho. Char the aromatics or the broth tastes like nothing.",
+    image: "/images/Cookbook/vn-pho-ga.jpg",
     macros: { calories: 350, protein: 42, carbs: 34, fat: 5 },
-    prep: "20 min", cook: "1 hr 30 min", serves: 4,
+    micros: { fiber: 2, sodium: 980, sugar: 3, potassium: 640, calcium: 50, iron: 2, vitaminC: 8 },
+    prep: "20 min", cook: "1 hr 30 min", makes: 4,
     ingredients: [
       "1 whole chicken (3 lb), or 3 lb chicken parts",
       "12 cups water",
@@ -915,8 +982,10 @@ export const RECIPES = [
     cuisine: "vietnamese",
     name: "Goi Cuon",
     blurb: "Fresh shrimp rolls. Nothing fried, and they travel well.",
+    image: "/images/Cookbook/vn-goi-cuon.jpg",
     macros: { calories: 230, protein: 26, carbs: 24, fat: 3 },
-    prep: "30 min", cook: "10 min", serves: 4,
+    micros: { fiber: 2, sodium: 720, sugar: 5, potassium: 420, calcium: 70, iron: 1.2, vitaminC: 12 },
+    prep: "30 min", cook: "10 min", makes: 4,
     ingredients: [
       "1 lb large shrimp, peeled and deveined",
       "12 rice paper wrappers",
@@ -945,8 +1014,10 @@ export const RECIPES = [
     cuisine: "korean",
     name: "Bulgogi Ssam",
     blurb: "Lean sirloin bulgogi in lettuce wraps. Skip the rice on rest days.",
+    image: "/images/Cookbook/kr-bulgogi-ssam.jpg",
     macros: { calories: 330, protein: 44, carbs: 14, fat: 11 },
-    prep: "2 hr", cook: "10 min", serves: 4,
+    micros: { fiber: 2, sodium: 780, sugar: 7, potassium: 720, calcium: 50, iron: 3, vitaminC: 10 },
+    prep: "2 hr", cook: "10 min", makes: 4,
     ingredients: [
       "1.5 lb top sirloin, sliced paper thin",
       "1/2 Asian pear, grated",
@@ -975,8 +1046,10 @@ export const RECIPES = [
     cuisine: "korean",
     name: "Gochujang Dak Gui",
     blurb: "Broiled gochujang chicken. Big flavor for very little fat.",
+    image: "/images/Cookbook/kr-dak-gochujang.jpg",
     macros: { calories: 315, protein: 47, carbs: 15, fat: 8 },
-    prep: "1 hr", cook: "18 min", serves: 4,
+    micros: { fiber: 2, sodium: 820, sugar: 8, potassium: 680, calcium: 40, iron: 2.2, vitaminC: 6 },
+    prep: "1 hr", cook: "18 min", makes: 4,
     ingredients: [
       "2 lb boneless skinless chicken thighs",
       "3 tbsp gochujang",
@@ -1005,8 +1078,10 @@ export const RECIPES = [
     cuisine: "korean",
     name: "Bibimbap",
     blurb: "Every vegetable seasoned separately. That is the whole point of the dish.",
+    image: "/images/Cookbook/kr-bibimbap.jpg",
     macros: { calories: 440, protein: 42, carbs: 38, fat: 14 },
-    prep: "30 min", cook: "20 min", serves: 4,
+    micros: { fiber: 7, sodium: 860, sugar: 7, potassium: 1100, calcium: 140, iron: 4.6, vitaminC: 26 },
+    prep: "30 min", cook: "20 min", makes: 4,
     ingredients: [
       "1 lb lean ground beef (93%)",
       "2 cups cooked short grain brown rice",
@@ -1039,8 +1114,10 @@ export const RECIPES = [
     cuisine: "greek",
     name: "Chicken Souvlaki with Tzatziki",
     blurb: "Lemon and oregano chicken with a yogurt sauce that stays lean.",
+    image: "/images/Cookbook/gr-souvlaki.jpg",
     macros: { calories: 350, protein: 52, carbs: 10, fat: 11 },
-    prep: "2 hr", cook: "12 min", serves: 4,
+    micros: { fiber: 1, sodium: 620, sugar: 4, potassium: 780, calcium: 120, iron: 1.4, vitaminC: 8 },
+    prep: "2 hr", cook: "12 min", makes: 4,
     ingredients: [
       "2 lb chicken breast, cut into 1.5 inch cubes",
       "1/4 cup fresh lemon juice",
@@ -1069,8 +1146,10 @@ export const RECIPES = [
     cuisine: "greek",
     name: "Psari Plaki",
     blurb: "Cod baked over tomatoes and onions. One dish, one pan.",
+    image: "/images/Cookbook/gr-bakaliaros-plaki.jpg",
     macros: { calories: 285, protein: 40, carbs: 16, fat: 8 },
-    prep: "15 min", cook: "35 min", serves: 4,
+    micros: { fiber: 4, sodium: 480, sugar: 8, potassium: 1050, calcium: 90, iron: 1.6, vitaminC: 30 },
+    prep: "15 min", cook: "35 min", makes: 4,
     ingredients: [
       "4 cod fillets (6 oz each)",
       "1 tbsp olive oil",
@@ -1099,8 +1178,10 @@ export const RECIPES = [
     cuisine: "greek",
     name: "Horiatiki with Grilled Shrimp",
     blurb: "Village salad with shrimp on top. No lettuce, that is the traditional version.",
+    image: "/images/Cookbook/gr-horiatiki-garides.jpg",
     macros: { calories: 320, protein: 36, carbs: 14, fat: 14 },
-    prep: "15 min", cook: "6 min", serves: 2,
+    micros: { fiber: 4, sodium: 880, sugar: 8, potassium: 780, calcium: 220, iron: 1.8, vitaminC: 60 },
+    prep: "15 min", cook: "6 min", makes: 2,
     ingredients: [
       "1 lb large shrimp, peeled and deveined",
       "3 large tomatoes, cut into wedges",
@@ -1131,8 +1212,10 @@ export const RECIPES = [
     cuisine: "middle-eastern",
     name: "Chicken Shawarma Bowl",
     blurb: "Oven shawarma over salad with a thinned tahini sauce.",
+    image: "/images/Cookbook/me-shawarma-bowl.jpg",
     macros: { calories: 430, protein: 50, carbs: 18, fat: 18 },
-    prep: "4 hr", cook: "30 min", serves: 4,
+    micros: { fiber: 5, sodium: 640, sugar: 5, potassium: 980, calcium: 140, iron: 3.4, vitaminC: 26 },
+    prep: "4 hr", cook: "30 min", makes: 4,
     ingredients: [
       "2 lb boneless skinless chicken thighs",
       "1/4 cup fresh lemon juice",
@@ -1163,8 +1246,10 @@ export const RECIPES = [
     cuisine: "middle-eastern",
     name: "Shish Tawook",
     blurb: "Yogurt and garlic chicken skewers. Lean, tender, and grill ready.",
+    image: "/images/Cookbook/me-shish-tawook.jpg",
     macros: { calories: 300, protein: 51, carbs: 6, fat: 8 },
-    prep: "6 hr", cook: "12 min", serves: 4,
+    micros: { fiber: 1, sodium: 680, sugar: 3, potassium: 740, calcium: 90, iron: 1.3, vitaminC: 10 },
+    prep: "6 hr", cook: "12 min", makes: 4,
     ingredients: [
       "2 lb chicken breast, cut into 1.5 inch cubes",
       "1/2 cup nonfat Greek yogurt",
@@ -1192,8 +1277,10 @@ export const RECIPES = [
     cuisine: "middle-eastern",
     name: "Lean Beef Kofta",
     blurb: "Herb heavy kofta made with 96% lean beef. Bulk it with parsley, not fat.",
+    image: "/images/Cookbook/me-kofta-lean.jpg",
     macros: { calories: 290, protein: 42, carbs: 7, fat: 10 },
-    prep: "20 min", cook: "12 min", serves: 4,
+    micros: { fiber: 2, sodium: 700, sugar: 2, potassium: 720, calcium: 60, iron: 4, vitaminC: 22 },
+    prep: "20 min", cook: "12 min", makes: 4,
     ingredients: [
       "1.5 lb 96% lean ground beef",
       "1 onion, grated and squeezed dry",
@@ -1224,8 +1311,10 @@ export const RECIPES = [
     cuisine: "brazilian",
     name: "Frango Grelhado com Vinagrete",
     blurb: "Grilled chicken with a raw tomato salsa. The default Brazilian plate.",
+    image: "/images/Cookbook/br-frango-vinagrete.jpg",
     macros: { calories: 330, protein: 50, carbs: 12, fat: 9 },
-    prep: "1 hr", cook: "14 min", serves: 4,
+    micros: { fiber: 3, sodium: 640, sugar: 6, potassium: 900, calcium: 50, iron: 1.8, vitaminC: 48 },
+    prep: "1 hr", cook: "14 min", makes: 4,
     ingredients: [
       "2 lb chicken breast, butterflied",
       "1/4 cup fresh lime juice",
@@ -1253,8 +1342,10 @@ export const RECIPES = [
     cuisine: "brazilian",
     name: "Moqueca de Peixe",
     blurb: "Coconut fish stew with the coconut milk cut with broth.",
+    image: "/images/Cookbook/br-moqueca.jpg",
     macros: { calories: 355, protein: 40, carbs: 14, fat: 16 },
-    prep: "15 min", cook: "25 min", serves: 4,
+    micros: { fiber: 3, sodium: 560, sugar: 6, potassium: 1050, calcium: 80, iron: 1.8, vitaminC: 70 },
+    prep: "15 min", cook: "25 min", makes: 4,
     ingredients: [
       "2 lb firm white fish, cut into large chunks",
       "3 tbsp fresh lime juice",
@@ -1285,8 +1376,10 @@ export const RECIPES = [
     cuisine: "brazilian",
     name: "Carne de Panela Magra",
     blurb: "Braised lean beef and vegetables. Cheap protein and it improves overnight.",
+    image: "/images/Cookbook/br-carne-panela.jpg",
     macros: { calories: 370, protein: 45, carbs: 22, fat: 11 },
-    prep: "15 min", cook: "2 hr", serves: 6,
+    micros: { fiber: 4, sodium: 580, sugar: 7, potassium: 980, calcium: 60, iron: 4.2, vitaminC: 12 },
+    prep: "15 min", cook: "2 hr", makes: 6,
     ingredients: [
       "2.5 lb bottom round or chuck, trimmed hard and cubed",
       "1 tbsp avocado oil",
@@ -1318,8 +1411,10 @@ export const RECIPES = [
     cuisine: "spanish",
     name: "Pollo al Ajillo",
     blurb: "A whole head of garlic and a splash of sherry. Twenty five minutes.",
+    image: "/images/Cookbook/es-pollo-ajillo.jpg",
     macros: { calories: 340, protein: 47, carbs: 6, fat: 13 },
-    prep: "10 min", cook: "25 min", serves: 4,
+    micros: { fiber: 1, sodium: 560, sugar: 1, potassium: 680, calcium: 40, iron: 2, vitaminC: 8 },
+    prep: "10 min", cook: "25 min", makes: 4,
     ingredients: [
       "2 lb boneless skinless chicken thighs, cut into large pieces",
       "1 whole head of garlic, cloves peeled and smashed",
@@ -1347,8 +1442,10 @@ export const RECIPES = [
     cuisine: "spanish",
     name: "Gambas al Ajillo",
     blurb: "Ten minutes, high protein, and almost no carbs.",
+    image: "/images/Cookbook/es-gambas-ajillo.jpg",
     macros: { calories: 230, protein: 35, carbs: 4, fat: 9 },
-    prep: "5 min", cook: "8 min", serves: 4,
+    micros: { fiber: 1, sodium: 720, sugar: 1, potassium: 420, calcium: 90, iron: 1, vitaminC: 8 },
+    prep: "5 min", cook: "8 min", makes: 4,
     ingredients: [
       "1.5 lb large shrimp, peeled and deveined",
       "8 garlic cloves, sliced thin",
@@ -1375,8 +1472,10 @@ export const RECIPES = [
     cuisine: "spanish",
     name: "Merluza a la Plancha con Pisto",
     blurb: "Seared hake over a slow cooked vegetable base.",
+    image: "/images/Cookbook/es-merluza-plancha.jpg",
     macros: { calories: 300, protein: 38, carbs: 18, fat: 9 },
-    prep: "15 min", cook: "40 min", serves: 4,
+    micros: { fiber: 5, sodium: 480, sugar: 9, potassium: 1080, calcium: 70, iron: 1.6, vitaminC: 90 },
+    prep: "15 min", cook: "40 min", makes: 4,
     ingredients: [
       "4 hake or cod fillets (6 oz each)",
       "1 tbsp olive oil for the pisto",
@@ -1407,8 +1506,10 @@ export const RECIPES = [
     cuisine: "african",
     name: "Peri Peri Chicken",
     blurb: "Mozambican style chili and lemon chicken, roasted hot.",
+    image: "/images/Cookbook/af-peri-peri.jpg",
     macros: { calories: 345, protein: 48, carbs: 8, fat: 13 },
-    prep: "4 hr", cook: "35 min", serves: 4,
+    micros: { fiber: 2, sodium: 640, sugar: 4, potassium: 780, calcium: 40, iron: 2, vitaminC: 70 },
+    prep: "4 hr", cook: "35 min", makes: 4,
     ingredients: [
       "2 lb boneless skinless chicken thighs",
       "8 red chilies, stemmed",
@@ -1436,8 +1537,10 @@ export const RECIPES = [
     cuisine: "african",
     name: "Doro Wat Ligero",
     blurb: "Ethiopian chicken stew with the butter cut way back. Berbere carries it.",
+    image: "/images/Cookbook/af-doro-wat.jpg",
     macros: { calories: 330, protein: 46, carbs: 16, fat: 10 },
-    prep: "15 min", cook: "1 hr", serves: 4,
+    micros: { fiber: 4, sodium: 700, sugar: 7, potassium: 820, calcium: 70, iron: 3.2, vitaminC: 14 },
+    prep: "15 min", cook: "1 hr", makes: 4,
     ingredients: [
       "2 lb boneless skinless chicken thighs",
       "4 large onions, diced very fine",
@@ -1466,8 +1569,10 @@ export const RECIPES = [
     cuisine: "african",
     name: "Chicken Tagine with Olives and Lemon",
     blurb: "Moroccan tagine, no added sugar and no dried fruit.",
+    image: "/images/Cookbook/af-tagine-djaj.jpg",
     macros: { calories: 350, protein: 47, carbs: 13, fat: 12 },
-    prep: "15 min", cook: "50 min", serves: 4,
+    micros: { fiber: 3, sodium: 780, sugar: 5, potassium: 800, calcium: 60, iron: 2.4, vitaminC: 14 },
+    prep: "15 min", cook: "50 min", makes: 4,
     ingredients: [
       "2 lb boneless skinless chicken thighs",
       "1 tbsp olive oil",
@@ -1504,4 +1609,9 @@ export function recipesByCuisine(cuisineId) {
 /* Helper: count per cuisine, used on the landing cards. */
 export function recipeCount(cuisineId) {
   return RECIPES.filter((r) => r.cuisine === cuisineId).length;
+}
+
+/* Helper: look one up by id. Used by the tracker when logging a recipe. */
+export function recipeById(id) {
+  return RECIPES.find((r) => r.id === id) || null;
 }
