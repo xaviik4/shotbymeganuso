@@ -14,8 +14,9 @@ export default function Hero() {
       </h1>
 
       <p className="hero-sub fade-up" style={{ animationDelay: "0.35s" }}>
-        Cinematic photo and video, graded look you can spot from across the feed.
-        Shot with intention, delivered fast, in English y en Español.
+        Hi, I'm Alexander. Cinematic photography, video, and web design based in
+        Oregon, made for brands that refuse to blend in. Shot with intention and
+        delivered fast, in English y en Español.
       </p>
 
       <div className="hero-actions fade-up" style={{ animationDelay: "0.5s" }}>

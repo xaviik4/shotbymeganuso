@@ -16,7 +16,7 @@ export default function Footer() {
           <a href={`mailto:${EMAIL}`}>Email</a>
         </div>
         <span className="mono" style={{ fontSize: 11, color: "#777" }}>
-          © {new Date().getFullYear()} ALEXANDER · EN / ES
+          © {new Date().getFullYear()} meganusopr. All rights reserved.
         </span>
       </div>
       <p className="footer-a11y">

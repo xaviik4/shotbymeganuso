@@ -141,7 +141,7 @@ export default function Portfolio() {
               className="portfolio-item"
               ref={el => itemRefs.current[i] = el}
             >
-              <img src={item.img} alt={item.title} loading="lazy" />
+              <img src={item.img} alt={`${CAT_LABEL[item.cat]}: ${item.title}`} loading="lazy" />
               <div className="portfolio-overlay">
                 <div className="portfolio-cat">{CAT_LABEL[item.cat]}</div>
                 <div className="portfolio-title">{item.title}</div>

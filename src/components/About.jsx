@@ -17,7 +17,7 @@ export default function About() {
             <div
               className="about-visual"
               role="img"
-              aria-label="Portrait placeholder, swap with a photo of Alexander"
+              aria-label="Portrait placeholder for Alexander"
             />
           </Reveal>
 
@@ -27,7 +27,7 @@ export default function About() {
               <h2 className="sec-title" id="about-title">I'm Alexander</h2>
 
               <p className="about-text" style={{ marginTop: 18 }}>
-                Photographer and videographer based in Corvallis, Oregon. I shoot
+                I'm a photographer and videographer based in Corvallis, Oregon. I shoot
                 automotive, editorial, lifestyle, and portrait work, focused on making
                 content that holds attention.
               </p>
@@ -49,10 +49,9 @@ export default function About() {
               </p>
 
               <p className="about-text">
-                Right now I'm building shotbymeganuso into a full creative studio. That
-                means content, but also web design and helping small businesses show up
-                online the way they deserve to. If you have a project in mind, I'd love
-                to hear about it.
+                This site is where I share my photography, video, and web design work. I
+                also help small businesses show up online with a clear, useful website.
+                If you have a project in mind, I'd love to hear about it.
               </p>
 
               <div className="stats-row">

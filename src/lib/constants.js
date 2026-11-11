@@ -2,9 +2,9 @@
 export const WEB3FORMS_KEY = "81971473-9c81-4cb7-a1f0-f17cfcc42191";
 export const EMAIL = "hello@shotbymeganuso.com";
 export const SOCIALS = {
-  instagram: "https://instagram.com/shotbymeganuso",
-  tiktok: "https://tiktok.com/@shotbymeganuso",
-  youtube: "https://youtube.com/@shotbymeganuso",
+  instagram: "https://www.instagram.com/meganusopr",
+  tiktok: "https://www.tiktok.com/@meganusopr",
+  youtube: "https://www.youtube.com/@meganusopr",
 };
 
 /* ─── PORTFOLIO DATA ───────────────────────────────────────────────── */

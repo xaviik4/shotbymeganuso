@@ -1,15 +1,26 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Reveal from "./Reveal";
 import { WEB3FORMS_KEY, EMAIL, SOCIALS, C } from "../lib/constants";
 
 export default function Contact({ setToast }) {
-  const [form, setForm] = useState({ name: "", email: "", type: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", type: "", message: "", botcheck: "" });
   const [sending, setSending] = useState(false);
+  const formStartedAt = useRef(Date.now());
 
   const handleChange = (e) => setForm(p => ({ ...p, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Quietly discard submissions that fill the off-screen honeypot.
+    if (form.botcheck) return;
+
+    // Filter instant automated submits while allowing normal fast completion.
+    if (Date.now() - formStartedAt.current < 2000) {
+      setToast("Please take a moment to review your inquiry and try again.");
+      return;
+    }
+
     setSending(true);
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -25,7 +36,10 @@ export default function Contact({ setToast }) {
         ? "✅ Inquiry sent. I reply within 24 hours."
         : "❌ Something broke. Email me directly instead."
       );
-      if (res.ok) setForm({ name: "", email: "", type: "", message: "" });
+      if (res.ok) {
+        setForm({ name: "", email: "", type: "", message: "", botcheck: "" });
+        formStartedAt.current = Date.now();
+      }
     } catch {
       setToast("❌ Connection error. Email me directly instead.");
     }
@@ -51,21 +65,33 @@ export default function Contact({ setToast }) {
               </div>
               <div className="contact-line">
                 <span className="mono">IG</span>
-                <a href={SOCIALS.instagram} target="_blank" rel="noopener noreferrer">@shotbymeganuso</a>
+                <a href={SOCIALS.instagram} target="_blank" rel="noopener noreferrer">@meganusopr</a>
               </div>
               <div className="contact-line">
                 <span className="mono">TIKTOK</span>
-                <a href={SOCIALS.tiktok} target="_blank" rel="noopener noreferrer">@shotbymeganuso</a>
+                <a href={SOCIALS.tiktok} target="_blank" rel="noopener noreferrer">@meganusopr</a>
               </div>
               <div className="contact-line">
                 <span className="mono">YT</span>
-                <a href={SOCIALS.youtube} target="_blank" rel="noopener noreferrer">@shotbymeganuso</a>
+                <a href={SOCIALS.youtube} target="_blank" rel="noopener noreferrer">@meganusopr</a>
               </div>
             </div>
           </Reveal>
 
           <Reveal delay={160}>
             <form onSubmit={handleSubmit}>
+              <div className="contact-honeypot" aria-hidden="true">
+                <label htmlFor="in-website">Leave this field empty</label>
+                <input
+                  id="in-website"
+                  name="botcheck"
+                  type="text"
+                  value={form.botcheck}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
               <div className="form-group">
                 <label className="form-label" htmlFor="in-name">Name *</label>
                 <input id="in-name" name="name" value={form.name} onChange={handleChange} className="form-input" placeholder="Your name" required />
