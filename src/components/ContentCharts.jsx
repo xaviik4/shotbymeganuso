@@ -2,12 +2,10 @@ import {
   CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
 
-/* Colours are literal hex rather than CSS variables: global.css has no custom
-   properties by design, and SVG presentation attributes cannot parse var()
-   anyway. Validated for colour-blind separation against the #151515 card
-   surface — worst-pair dE 36.7 normal, 27.6 protan. */
+/* Match the site's orange and neutral palette. SVG presentation attributes
+   take literal colors, and series names remain visible alongside each line. */
 const YOUTUBE = "#FF4D00";
-const INSTAGRAM = "#3987e5";
+const INSTAGRAM = "#A0A0A0";
 
 const GRID = "#232323";
 const MUTED = "#A0A0A0";

@@ -9,7 +9,7 @@ const ContentCharts = lazy(() => import("../components/ContentCharts"));
 
 const PLATFORMS = [
   { key: "youtube", label: "YouTube", color: "#FF4D00" },
-  { key: "instagram", label: "Instagram", color: "#3987e5" },
+  { key: "instagram", label: "Instagram", color: "#A0A0A0" },
 ];
 
 const full = new Intl.NumberFormat("en-US");

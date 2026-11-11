@@ -42,7 +42,7 @@ export default function Dashboard() {
       <main className="ops-page">
         <header className="ops-page-head">
           <div><p className="ops-eyebrow">Overview · {data ? `${dateLabel(data.week.start)} – ${dateLabel(weekEnd?.toISOString())}` : "This week"}</p><h1>Dashboard</h1><p className="ops-subtitle">Weekly activity and the next work to move forward.</p></div>
-          <Link className="ops-button" to="/dashboard/pipeline">Open pipeline <span aria-hidden="true">→</span></Link>
+          <Link className="ops-button btn-primary" to="/dashboard/pipeline">Open pipeline <span aria-hidden="true">→</span></Link>
         </header>
         {error && <div className="ops-alert" role="alert">{error}</div>}
         {loading ? <p className="ops-loading" role="status">Loading dashboard…</p> : data && (

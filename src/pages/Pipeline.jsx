@@ -71,7 +71,7 @@ function ProspectEditor({ prospect, token, onClose, onSaved }) {
         <label className="ops-check"><input type="checkbox" name="speaks_spanish" checked={form.speaks_spanish} onChange={change} /> Speaks Spanish</label>
         <label className="ops-check"><input type="checkbox" name="new_construction" checked={form.new_construction} onChange={change} /> New construction</label>
       </div>
-      <div className="ops-modal-actions"><button type="button" className="ops-button ops-button-quiet" onClick={onClose}>Cancel</button><button className="ops-button" disabled={saving}>{saving ? "Saving…" : "Save prospect"}</button></div>
+      <div className="ops-modal-actions"><button type="button" className="ops-button btn-outline" onClick={onClose}>Cancel</button><button className="ops-button btn-primary" disabled={saving}>{saving ? "Saving…" : "Save prospect"}</button></div>
     </form>
   </div>;
 }
@@ -101,7 +101,7 @@ function CsvImporter({ token, onClose, onImported }) {
     <label className="ops-field">CSV file<input type="file" accept=".csv,text/csv" onChange={chooseFile} /></label>
     {records && <><p className="ops-success">Preview: {records.length} prospects ready to import.</p><div className="ops-table-wrap ops-preview"><table><thead><tr><th>Name</th><th>Area</th><th>Status</th><th>First sent</th></tr></thead><tbody>{records.slice(0, 8).map((row, index) => <tr key={`${row.name}-${index}`}><td>{row.name}</td><td>{row.area || "Other Omaha"}</td><td>{row.status || "to contact"}</td><td>{row.first_sent_date || "—"}</td></tr>)}</tbody></table></div></>}
     {error && <div className="ops-alert" role="alert">{error}</div>}
-    <div className="ops-modal-actions"><button className="ops-button ops-button-quiet" onClick={onClose}>Cancel</button><button className="ops-button" disabled={!records?.length || saving} onClick={save}>{saving ? "Importing…" : `Import ${records?.length || ""} prospects`}</button></div>
+    <div className="ops-modal-actions"><button className="ops-button btn-outline" onClick={onClose}>Cancel</button><button className="ops-button btn-primary" disabled={!records?.length || saving} onClick={save}>{saving ? "Importing…" : `Import ${records?.length || ""} prospects`}</button></div>
   </div></div>;
 }
 
@@ -162,7 +162,7 @@ export default function Pipeline() {
   const today = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Los_Angeles" }).format(new Date());
 
   return <OperationsLayout active="pipeline"><main className="ops-page ops-pipeline-page">
-    <header className="ops-page-head"><div><p className="ops-eyebrow">Sell · CRM</p><h1>Pipeline</h1><p className="ops-subtitle">{prospects.length} prospects · follow-ups sorted by due date</p></div><div className="ops-toolbar"><button className="ops-button ops-button-quiet" onClick={() => setImportOpen(true)}>Import CSV</button><button className="ops-button ops-button-quiet" onClick={exportCsv}>Export CSV</button><button className="ops-button" onClick={() => setEditor(null)}>Add prospect <span aria-hidden="true">+</span></button></div></header>
+    <header className="ops-page-head"><div><p className="ops-eyebrow">Sell · CRM</p><h1>Pipeline</h1><p className="ops-subtitle">{prospects.length} prospects · follow-ups sorted by due date</p></div><div className="ops-toolbar"><button className="ops-button btn-outline" onClick={() => setImportOpen(true)}>Import CSV</button><button className="ops-button btn-outline" onClick={exportCsv}>Export CSV</button><button className="ops-button btn-primary" onClick={() => setEditor(null)}>Add prospect <span aria-hidden="true">+</span></button></div></header>
     <section className="ops-filters" aria-label="Pipeline filters">
       <select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value)} aria-label="Filter by status"><option>All statuses</option>{PROSPECT_STATUSES.map((status) => <option key={status}>{status}</option>)}</select>
       <select value={priorityFilter} onChange={(event) => setPriorityFilter(event.target.value)} aria-label="Filter by priority"><option>All priorities</option>{["A", "B", "C"].map((priority) => <option key={priority}>{priority}</option>)}</select>

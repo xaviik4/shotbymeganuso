@@ -31,7 +31,7 @@ function ClientForm({ client, token, onClose, onSaved }) {
     <label className="ops-field">Filming date<input type="date" name="filming_date" value={form.filming_date || ""} onChange={change} /></label>
     <label className="ops-field">Status<select name="status" value={form.status} onChange={change}>{CLIENT_STATUSES.map((status) => <option key={status}>{status}</option>)}</select></label>
     <label className="ops-field">Notes<textarea rows="4" name="notes" value={form.notes} onChange={change} /></label>
-    <div className="ops-modal-actions"><button type="button" className="ops-button ops-button-quiet" onClick={onClose}>Cancel</button><button className="ops-button" disabled={saving}>{saving ? "Saving…" : "Save client"}</button></div>
+    <div className="ops-modal-actions"><button type="button" className="ops-button btn-outline" onClick={onClose}>Cancel</button><button className="ops-button btn-primary" disabled={saving}>{saving ? "Saving…" : "Save client"}</button></div>
   </form></div>;
 }
 
@@ -65,7 +65,7 @@ export default function Clients() {
   const activeMrr = clients.filter((client) => isActiveClient(client.status)).reduce((sum, client) => sum + Number(client.monthly_price || 0), 0);
 
   return <OperationsLayout active="clients"><main className="ops-page">
-    <header className="ops-page-head"><div><p className="ops-eyebrow">Sell · Accounts</p><h1>Clients</h1><p className="ops-subtitle">Track each account through its monthly production cycle.</p></div><button className="ops-button" onClick={() => setEditor(null)}>Add client <span aria-hidden="true">+</span></button></header>
+    <header className="ops-page-head"><div><p className="ops-eyebrow">Sell · Accounts</p><h1>Clients</h1><p className="ops-subtitle">Track each account through its monthly production cycle.</p></div><button className="ops-button btn-primary" onClick={() => setEditor(null)}>Add client <span aria-hidden="true">+</span></button></header>
     <div className="ops-metrics ops-client-summary"><article className="ops-metric"><span>Active clients</span><strong>{activeCount}</strong></article><article className="ops-metric is-accent"><span>Monthly recurring revenue</span><strong>{money.format(activeMrr)}</strong></article></div>
     {error && <div className="ops-alert" role="alert">{error}</div>}
     {loading ? <p className="ops-loading" role="status">Loading clients…</p> : <div className="ops-client-grid">
@@ -82,7 +82,7 @@ export default function Clients() {
           <div className="ops-client-actions"><span className={`ops-status-badge status-${client.status.replaceAll(" ", "-")}`}>{client.status}</span><button onClick={() => remove(client)}>Delete</button></div>
         </article>;
       })}
-      {!clients.length && <div className="ops-empty-card"><h2>No clients yet</h2><p>Add the first client to track delivery and recurring revenue.</p><button className="ops-button" onClick={() => setEditor(null)}>Add client</button></div>}
+      {!clients.length && <div className="ops-empty-card"><h2>No clients yet</h2><p>Add the first client to track delivery and recurring revenue.</p><button className="ops-button btn-primary" onClick={() => setEditor(null)}>Add client</button></div>}
     </div>}
     {editor !== undefined && <ClientForm client={editor} token={session.access_token} onClose={() => setEditor(undefined)} onSaved={(client) => { setClients((current) => current.some((item) => item.id === client.id) ? current.map((item) => item.id === client.id ? client : item) : [client, ...current]); setEditor(undefined); }} />}
   </main></OperationsLayout>;

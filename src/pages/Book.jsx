@@ -25,22 +25,22 @@ export default function Book() {
     finally { setSending(false); }
   }
 
-  return <main className="book-page">
-    <section className="book-intro"><p className="ops-eyebrow">Start a conversation</p><h1>Tell me what you’re building.</h1><p>Share a little about your business and what you need. I’ll follow up to find a good next step.</p></section>
+  return <div className="book-page">
+    <section className="book-intro" aria-labelledby="book-title"><p className="sec-label">Start a conversation</p><h1 className="sec-title" id="book-title">Tell me what you’re building.</h1><p className="sec-sub">Share a little about your business and what you need. I’ll follow up to find a good next step.</p></section>
     <form className="book-form" onSubmit={submit}>
       <div className="book-honeypot" aria-hidden="true"><label htmlFor="book-website-url">Leave this field empty</label><input id="book-website-url" name="website_url" type="text" tabIndex={-1} autoComplete="off" /></div>
-      <label className="ops-field">Name *<input required name="name" autoComplete="name" value={form.name} onChange={change} /></label>
-      <label className="ops-field">Email *<input required type="email" name="email" autoComplete="email" value={form.email} onChange={change} /></label>
-      <label className="ops-field">Phone *<input required type="tel" name="phone" autoComplete="tel" value={form.phone} onChange={change} /></label>
-      <label className="ops-field">Business name<input name="business_name" value={form.business_name} onChange={change} /></label>
-      <label className="ops-field">Instagram handle<input name="instagram" placeholder="@yourbusiness" value={form.instagram} onChange={change} /></label>
-      <label className="ops-field">Website<input type="url" name="website" placeholder="https://" value={form.website} onChange={change} /></label>
-      <label className="ops-field book-field-wide">What would you most like help with? *<textarea required rows="4" name="wants_help" value={form.wants_help} onChange={change} /></label>
-      <label className="ops-field book-field-wide">How are you getting new clients right now? *<textarea required rows="4" name="client_acquisition" value={form.client_acquisition} onChange={change} /></label>
-      <label className="ops-field">Do your clients prefer Spanish, English or both? *<select required name="client_language" value={form.client_language} onChange={change}><option value="">Choose one</option><option>Spanish</option><option>English</option><option>Both</option></select></label>
+      <label className="form-group book-field"> <span className="form-label">Name *</span><input className="form-input" required name="name" autoComplete="name" value={form.name} onChange={change} /></label>
+      <label className="form-group book-field"> <span className="form-label">Email *</span><input className="form-input" required type="email" name="email" autoComplete="email" value={form.email} onChange={change} /></label>
+      <label className="form-group book-field"> <span className="form-label">Phone *</span><input className="form-input" required type="tel" name="phone" autoComplete="tel" value={form.phone} onChange={change} /></label>
+      <label className="form-group book-field"> <span className="form-label">Business name</span><input className="form-input" name="business_name" value={form.business_name} onChange={change} /></label>
+      <label className="form-group book-field"> <span className="form-label">Instagram handle</span><input className="form-input" name="instagram" placeholder="@yourbusiness" value={form.instagram} onChange={change} /></label>
+      <label className="form-group book-field"> <span className="form-label">Website</span><input className="form-input" type="url" name="website" placeholder="https://" value={form.website} onChange={change} /></label>
+      <label className="form-group book-field book-field-wide"> <span className="form-label">What would you most like help with? *</span><textarea className="form-input" required rows="4" name="wants_help" value={form.wants_help} onChange={change} /></label>
+      <label className="form-group book-field book-field-wide"> <span className="form-label">How are you getting new clients right now? *</span><textarea className="form-input" required rows="4" name="client_acquisition" value={form.client_acquisition} onChange={change} /></label>
+      <label className="form-group book-field"> <span className="form-label">Do your clients prefer Spanish, English or both? *</span><select className="form-input" required name="client_language" value={form.client_language} onChange={change}><option value="">Choose one</option><option>Spanish</option><option>English</option><option>Both</option></select></label>
       {status && <p className="book-status" role="status">{status}</p>}
-      <button className="ops-button" disabled={sending}>{sending ? "Sending…" : "Send inquiry"}</button>
+      <button className="form-submit book-submit" disabled={sending}>{sending ? "Sending…" : "Send inquiry →"}</button>
     </form>
-    <section className="book-calendar"><p className="ops-eyebrow">Schedule a call</p><h2>Booking calendar</h2><p>Cal.com / Calendly embed goes here.</p><div className="book-calendar-placeholder" aria-label="Booking widget placeholder">Booking widget placeholder</div></section>
-  </main>;
+    <section className="book-calendar"><p className="sec-label">Schedule a call</p><h2 className="sec-title">Booking calendar</h2><p className="sec-sub">Cal.com / Calendly embed goes here.</p><div className="book-calendar-placeholder dash-chart" aria-label="Booking widget placeholder">Booking widget placeholder</div></section>
+  </div>;
 }
