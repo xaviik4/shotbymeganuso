@@ -4,6 +4,7 @@ import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/Home";
 import WorkPage from "./pages/WorkPage";
 import Pricing from "./pages/Pricing";
@@ -111,6 +112,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AuthProvider>
         <RouteMetadata />
         <Suspense fallback={<div className="track-loading" role="status">Loading page...</div>}>
