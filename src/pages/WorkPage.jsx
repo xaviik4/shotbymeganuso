@@ -1,8 +1,11 @@
 import Reveal from "../components/Reveal";
 import Work from "../components/Work";
 import { C } from "../lib/constants";
+import { useSiteCopy } from "../lib/language";
 
 export default function WorkPage() {
+  const { copy } = useSiteCopy();
+  const c = copy.work;
   return (
     <>
       {/* HERO HEADER */}
@@ -16,12 +19,9 @@ export default function WorkPage() {
       >
         <div className="section" style={{ textAlign: "center" }}>
           <Reveal>
-            <div className="sec-label">Selected Work</div>
-            <h1 className="sec-title" id="work-page-title">The Archive</h1>
-            <p className="sec-sub" style={{ maxWidth: 620, margin: "0 auto" }}>
-              A collection of photography across automotive, editorial, lifestyle,
-              and portrait. Every image shot, edited, and delivered by me.
-            </p>
+            <div className="sec-label">{c.label}</div>
+            <h1 className="sec-title" id="work-page-title">{c.title}</h1>
+            <p className="sec-sub" style={{ maxWidth: 620, margin: "0 auto" }}>{c.description}</p>
           </Reveal>
         </div>
       </section>

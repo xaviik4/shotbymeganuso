@@ -1,27 +1,32 @@
 import { Link } from "react-router-dom";
-import { SOCIALS, EMAIL } from "../lib/constants";
+import { SITE_CONFIG, SOCIALS } from "../lib/site-config";
+import { useSiteCopy, localizedPath } from "../lib/language";
+import { useLocation } from "react-router-dom";
 
 export default function Footer() {
+  const { copy, language } = useSiteCopy();
+  const { pathname } = useLocation();
+  const otherLanguagePath = localizedPath(pathname.replace(/^\/es(?=\/|$)/, "") || "/", language === "es" ? "en" : "es");
   return (
     <footer>
       <div className="footer-inner">
         <div className="footer-logo">
           <span className="rec-dot" aria-hidden="true"></span>
-          SHOTBYMEGANUSO
+          {SITE_CONFIG.brandName.toUpperCase()}
         </div>
         <div className="footer-links">
-          <Link to="/work">Work</Link>
-          <Link to="/pricing">Pricing</Link>
+          <Link to={localizedPath("/work", language)}>{copy.footer.work}</Link>
+          <Link to={localizedPath("/pricing", language)}>{copy.footer.pricing}</Link>
+          <Link to={localizedPath("/privacy", language)}>{copy.footer.privacy}</Link>
+          <Link to={otherLanguagePath}>{copy.nav.language}</Link>
           <a href={SOCIALS.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a href={`mailto:${EMAIL}`}>Email</a>
+          <a href={`mailto:${SITE_CONFIG.email}`}>{copy.footer.email}</a>
         </div>
         <span className="mono" style={{ fontSize: 11, color: "#777" }}>
-          © {new Date().getFullYear()} meganusopr. All rights reserved.
+          © {new Date().getFullYear()} {SITE_CONFIG.brandName}. All rights reserved.
         </span>
       </div>
-      <p className="footer-a11y">
-        ♿ Built to WCAG 2.1 AA accessibility standards. Found a barrier? Email me and I'll fix it.
-      </p>
+      <p className="footer-a11y">{copy.footer.accessibility}</p>
     </footer>
   );
 }

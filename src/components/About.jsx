@@ -1,14 +1,10 @@
 import Reveal from "./Reveal";
 import { C } from "../lib/constants";
-
-const STATS = [
-  { num: "3+",       label: "Years Shooting" },
-  { num: "5+",       label: "Years Editing" },
-  { num: "R6 MK II", label: "Canon Body" },
-  { num: "24h",      label: "Response Time" },
-];
+import { useSiteCopy } from "../lib/language";
 
 export default function About() {
+  const { copy } = useSiteCopy();
+  const c = copy.about;
   return (
     <section id="about" aria-labelledby="about-title" style={{ background: C.panel }}>
       <div className="section">
@@ -17,45 +13,18 @@ export default function About() {
             <div
               className="about-visual"
               role="img"
-              aria-label="Portrait placeholder for Alexander"
+              aria-label="Portrait photography by Alexander"
             />
           </Reveal>
 
           <Reveal delay={120}>
             <div>
-              <div className="sec-label">05 / Behind the Lens</div>
-              <h2 className="sec-title" id="about-title">I'm Alexander</h2>
-
-              <p className="about-text" style={{ marginTop: 18 }}>
-                I'm a photographer and videographer based in Corvallis, Oregon. I shoot
-                automotive, editorial, lifestyle, and portrait work, focused on making
-                content that holds attention.
-              </p>
-
-              <p className="about-text">
-                I care about the details: framing, light, color, and pacing. I approach
-                every shoot with the same intention, whether it's a car edit at golden
-                hour, a live music set in a packed venue, or a portrait session outside
-                a college campus. Good content takes preparation, patience, and knowing
-                what to look for when the moment arrives.
-              </p>
-
-              <p className="about-text">
-                Editing has been a hobby for over five years and shooting seriously for
-                the last three. My editing background shapes how I shoot. I frame with
-                the final edit already in mind, which means less wasted footage, tighter
-                turnaround, and content that fits together the way it should. Canon R6
-                Mark II, DaVinci Resolve, Adobe Lightroom.
-              </p>
-
-              <p className="about-text">
-                This site is where I share my photography, video, and web design work. I
-                also help small businesses show up online with a clear, useful website.
-                If you have a project in mind, I'd love to hear about it.
-              </p>
+              <div className="sec-label">{c.label}</div>
+              <h2 className="sec-title" id="about-title">{c.title}</h2>
+              {c.paragraphs.map((p, i) => <p className="about-text" style={i === 0 ? { marginTop: 18 } : undefined} key={p}>{p}</p>)}
 
               <div className="stats-row">
-                {STATS.map(s => (
+                {c.stats.map(s => (
                   <div className="stat-box" key={s.label}>
                     <div className="stat-num">{s.num}</div>
                     <div className="stat-label">{s.label}</div>

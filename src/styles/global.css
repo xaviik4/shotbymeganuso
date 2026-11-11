@@ -141,15 +141,12 @@ body:has(.mobile-drawer.open) .nav { opacity: 0; pointer-events: none; }
 .ba-wrap { margin-top: 48px; position: relative; border-radius: 6px; overflow: hidden; border: 1px solid #232323; aspect-ratio: 16/9; user-select: none; }
 .ba-layer { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
 .ba-before {
-  background:
-    radial-gradient(ellipse at 40% 40%, rgba(140,150,140,0.25), transparent 60%),
-    linear-gradient(150deg, #3a3d3a, #23262a 60%, #1a1c20);
+  background: url('/images-optimized/Automotive/CH0A1961-1280.webp') center 52% / cover no-repeat;
+  filter: saturate(.25) contrast(.85) brightness(1.15);
 }
 .ba-after {
-  background:
-    radial-gradient(ellipse at 60% 35%, rgba(255,77,0,0.22), transparent 55%),
-    radial-gradient(ellipse at 25% 75%, rgba(0,90,110,0.28), transparent 60%),
-    linear-gradient(150deg, #1c1410, #0d0f14 60%, #05060a);
+  background: url('/images-optimized/Automotive/CH0A1961-1280.webp') center 52% / cover no-repeat;
+  filter: saturate(1.15) contrast(1.08);
 }
 .ba-clip { overflow: hidden; right: auto; }
 .ba-clip .ba-before { width: 100%; }
@@ -287,10 +284,9 @@ body:has(.mobile-drawer.open) .nav { opacity: 0; pointer-events: none; }
 @media (max-width: 820px) { .about-wrap { grid-template-columns: 1fr; gap: 32px; } }
 .about-visual {
   aspect-ratio: 4/5; border-radius: 4px; border: 1px solid #232323; position: relative;
-  background: radial-gradient(ellipse at 60% 30%, rgba(255,77,0,0.14), transparent 60%), linear-gradient(160deg, #1c1c1c, #0e0e0e);
+  background: url('/images-optimized/Portrait/CH0A5513-1280.webp') center 36% / cover no-repeat;
   display: flex; align-items: center; justify-content: center;
 }
-.about-visual::after { content: '📷'; font-size: 84px; opacity: 0.8; filter: drop-shadow(0 0 26px rgba(255,77,0,0.4)); }
 .about-text { color: #C6C6C6; font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
 .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 24px; }
 .stat-box { border: 1px solid #232323; border-radius: 4px; padding: 16px 14px; text-align: center; background: #151515; }
@@ -1061,6 +1057,34 @@ footer { background: #060606; border-top: 1px solid #232323; padding: 44px 48px;
 .book-calendar .sec-title { margin-bottom: 12px; }
 .book-calendar .sec-sub { margin-top: 0; margin-bottom: 20px; }
 .book-calendar-placeholder { min-height: 180px; display: grid; place-items: center; border-style: dashed; color: #A0A0A0; font: 10px 'JetBrains Mono', monospace; letter-spacing: 1px; text-transform: uppercase; }
+.nav-language { margin-left: 12px; color: #A0A0A0; font: 11px 'JetBrains Mono', monospace; letter-spacing: .1em; }
+.pricing-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 42px; }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px; max-width: 1080px; margin: 0 auto; align-items: stretch; }
+.pricing-card { position: relative; display: flex; flex-direction: column; height: 100%; padding: 36px 30px; border: 1px solid #232323; background: #151515; }
+.pricing-card.highlighted { border-color: #FF4D00; }
+.pricing-card h2 { margin: 0 0 14px; font: 32px 'Bebas Neue', sans-serif; color: #F2F0EB; }
+.pricing-card > p { min-height: 48px; color: #A0A0A0; font-size: 13px; line-height: 1.6; }
+.pricing-price { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; font: 52px/1 'Bebas Neue', sans-serif; color: #F2F0EB; }
+.pricing-price small { color: #A0A0A0; font: 10px 'JetBrains Mono', monospace; text-transform: uppercase; }
+.pricing-card ul { flex: 1; margin: 12px 0 28px; padding: 0; list-style: none; }
+.pricing-card li { padding: 9px 0; border-bottom: 1px solid #232323; color: #C6C6C6; font-size: 13px; line-height: 1.5; }
+.pricing-card li::before { content: '✓'; margin-right: 10px; color: #FF4D00; }
+.pricing-popular { position: absolute; top: -11px; left: 26px; padding: 5px 10px; background: #FF4D00; color: #F2F0EB; font: 10px 'JetBrains Mono', monospace; text-transform: uppercase; }
+.pricing-note { max-width: 700px; margin: 34px auto 0; color: #A0A0A0; font-size: 12px; line-height: 1.7; text-align: center; }
+.work-more { display: flex; justify-content: center; margin-top: 32px; }
+.work-video-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.work-video iframe { width: 100%; aspect-ratio: 16/9; border: 0; background: #151515; }
+.work-video h3 { color: #F2F0EB; font: 18px 'Bebas Neue', sans-serif; }
+.privacy-page { min-height: 65vh; padding-top: clamp(130px, 17vw, 190px); }
+.privacy-content { max-width: 760px; margin-top: 44px; }
+.privacy-content article { padding: 22px 0; border-top: 1px solid #232323; }
+.privacy-content h2 { color: #F2F0EB; font: 24px 'Bebas Neue', sans-serif; }
+.privacy-content p { color: #C6C6C6; font-size: 14px; line-height: 1.8; }
+.testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.testimonial-grid figure { margin: 0; padding: 24px; border: 1px solid #232323; background: #151515; }
+.testimonial-grid blockquote { margin: 0 0 20px; color: #C6C6C6; line-height: 1.7; }
+.testimonial-grid figcaption { color: var(--orange); font: 11px 'JetBrains Mono', monospace; }
+@media (max-width: 680px) { .pricing-card { padding: 30px 22px; } .nav-language { display: inline-block; margin: 16px 0 0; } .book-calendar { text-align: center; } }
 
 @media (max-width: 1100px) {
   .ops-sidebar { width: 220px; flex-basis: 220px; }

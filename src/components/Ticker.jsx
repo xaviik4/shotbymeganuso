@@ -1,5 +1,7 @@
+import { useSiteCopy } from "../lib/language";
 export default function Ticker() {
-  const items = ["Automotive", "Editorial", "Lifestyle", "Portrait", "UGC", "Web Design", "Reels", "Product"];
+  const { copy } = useSiteCopy();
+  const items = copy.ticker;
   const row = items.map((it, i) => (
     <span className="ticker-item" key={i}><span>●</span>{it}</span>
   ));

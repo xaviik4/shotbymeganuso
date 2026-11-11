@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { SITE_CONFIG } from "../lib/site-config";
 
 export default function Login() {
   const { signIn, session } = useAuth();
@@ -43,7 +44,7 @@ export default function Login() {
       <Link to="/" className="login-back">← Back to site</Link>
 
       <div className="login-card">
-        <p className="login-eyebrow">SHOTBYMEGANUSO</p>
+        <p className="login-eyebrow">{SITE_CONFIG.brandName.toUpperCase()}</p>
         <h1 className="login-title">Client Login</h1>
 
         {error && <div className="login-error" role="alert">{error}</div>}

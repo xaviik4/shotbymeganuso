@@ -1,20 +1,21 @@
 # Repository Architecture
 - React 18 single-page application built with Vite 6 and React Router 7; this is not a Next.js App/Pages Router project.
 - Styling uses hand-written global and component CSS. No Tailwind, Lucide, or TypeScript is configured; charts use Recharts.
-- Deployment target: Vercel static hosting plus Node serverless API functions and a daily Cron.
+- Deployment target: Vercel static hosting with clean-URL prerendered public routes, a noindex client-only shell for private paths, Node serverless API functions, and a daily Cron.
 - Package manager: npm (`package-lock.json`).
 
 # Directory Map
 - `src/pages/`: route-level pages (`/`, `/work`, `/pricing`, `/book`, `/login`, protected operations routes under `/dashboard`, plus `/cookbook` and `/tracker`).
 - `src/components/`: shared marketing, navigation, portfolio, contact, and dashboard UI; component CSS is colocated where applicable.
 - `src/context/`: React auth context and session subscription.
-- `src/lib/`: Supabase browser client, content queries, recipe/nutrition data, and site constants.
+- `src/lib/`: Supabase browser client, site config, EN/ES copy and route helpers, analytics, content queries, and recipe/nutrition data.
+- `src/data/`: Public portfolio photo, video, and testimonial data.
 - `src/styles/`, `src/*.css`: global and legacy application styles.
-- `src/assets/`: bundled assets; `public/images/` holds portfolio and recipe media served by URL.
+- `src/assets/`: bundled assets; `originals/portfolio/` stores local full-size photos and is Git-ignored; `public/images-optimized/` contains committed responsive WebPs used by clean clones and Vercel builds.
 - `api/`: Vercel serverless sync endpoints and server-only helpers; `api/cron/` contains scheduled sync.
 - `api/ops/`: role-checked operations APIs. `src/pages/` operations pages call these APIs; new operations tables have RLS enabled, no anon policies, and membership-scoped authenticated policies.
 - `supabase/migrations/`: SQL schema, RLS policies, and database changes.
-- Root config: `vite.config.js`, `vercel.json`, `eslint.config.js`, `index.html`, `package.json`; no Next, Tailwind, or TypeScript config exists.
+- Root config: `vite.config.js`, `vercel.json`, `eslint.config.js`, `index.html`, `package.json`; `scripts/` optimizes media and prerenders EN/ES routes. No Next, Tailwind, or TypeScript config exists.
 
 # Data & Supabase Setup
 - Browser client: `src/lib/supabase.js`, initialized with `@supabase/supabase-js` and `VITE_SUPABASE_URL` plus `VITE_SUPABASE_ANON_KEY`.
@@ -32,8 +33,8 @@
 - **Digital Face & Copyright:** Use `meganusopr` as the online handle on social links and footer copyright. Do not pair it with Alexander as a double name.
 - **Domain/Site Name:** `shotbymeganuso` is the website/domain name (`shotbymeganuso.com`), not a studio, agency, or company. Do not describe it as an organization being built.
 - Use React state/effects only in components that need browser interaction; there is no Next server/client component boundary or `'use client'` convention here.
-- The project is JavaScript-only with no TS config; if TypeScript is introduced, enable strict checking and keep server secrets out of browser imports.
-- Start locally with `npm run dev`; create the production bundle with `npm run build`; run logic tests with `npm test`.
+- The project is JavaScript-only with no TS config; keep server secrets out of browser imports. `npm run typecheck` currently validates JS/JSX module syntax, not static TypeScript types.
+- Start locally with `npm run dev`; create the production bundle with `npm run build`; run `npm run lint`, `npm run typecheck`, and `npm test` for checks.
 - Keep data authorization in RLS and server endpoint checks; protected routes are UX controls, not a substitute for database/API authorization.
 
 # Active Sprint Scratchpad
@@ -45,3 +46,5 @@
 - [x] Standardize Alexander as the person/bio, `meganusopr` as the digital face and copyright, and `shotbymeganuso` as the website identity.
 - [ ] Audit mobile gallery/filter interactions.
 - [x] Add operations CRM, authenticated APIs, public write-only intake, and Los Angeles Monday–Sunday reporting.
+- [x] Rebrand public copy around Alexander and meganusopr; add English/Spanish public routes, prerendered metadata, sitemap, robots rules, privacy page, and optional analytics tracking.
+- [x] Convert portfolio originals to responsive WebP build outputs; keep originals outside `public/`, use lazy gallery images, and maintain empty video/testimonial data until items are supplied.

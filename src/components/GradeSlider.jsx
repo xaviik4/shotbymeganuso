@@ -1,19 +1,17 @@
 import { useState } from "react";
 import Reveal from "./Reveal";
+import { useSiteCopy } from "../lib/language";
 
 export default function GradeSlider() {
+  const { copy } = useSiteCopy();
+  const c = copy.grade;
   const [pos, setPos] = useState(50);
 
   return (
     <section id="grade" aria-labelledby="grade-title">
       <div className="section">
         <Reveal>
-          <div className="sec-label">01 / The Grade</div>
-          <h2 className="sec-title" id="grade-title">See the Difference</h2>
-          <p className="sec-sub">
-            Drag the handle. Left is straight out of camera. Right is the grade that makes people
-            stop scrolling. Every project gets this treatment, frame by frame.
-          </p>
+          <div className="sec-label">{c.label}</div><h2 className="sec-title" id="grade-title">{c.title}</h2><p className="sec-sub">{c.description}</p>
         </Reveal>
 
         <Reveal delay={100}>
@@ -24,8 +22,7 @@ export default function GradeSlider() {
             </div>
             {/* TO ADD REAL IMAGES: set background-image on .ba-before and .ba-after
                 in global.css — before.webp = ungraded/SOOC, after.webp = graded */}
-            <span className="ba-tag raw">RAW / SOOC</span>
-            <span className="ba-tag graded">GRADED</span>
+            <span className="ba-tag raw">{c.raw}</span><span className="ba-tag graded">{c.graded}</span>
             <div className="ba-divider" style={{ left: `${pos}%` }} aria-hidden="true">
               <div className="ba-handle">↔</div>
             </div>
@@ -36,7 +33,7 @@ export default function GradeSlider() {
               value={pos}
               onChange={e => setPos(Number(e.target.value))}
               className="ba-range"
-              aria-label="Before and after comparison slider. Left shows the unedited photo, right shows the graded photo."
+              aria-label={c.sliderLabel}
             />
           </div>
         </Reveal>
