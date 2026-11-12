@@ -1,0 +1,29 @@
+[
+  {
+    "id": "grade-1",
+    "before": {
+      "src": "/images-optimized/grade-before-1280.webp",
+      "srcSet": "/images-optimized/grade-before-640.webp 640w, /images-optimized/grade-before-1280.webp 1280w, /images-optimized/grade-before-2000.webp 2000w",
+      "width": 1280,
+      "height": 1600
+    },
+    "after": {
+      "src": "/images-optimized/grade-after-1280.webp",
+      "srcSet": "/images-optimized/grade-after-640.webp 640w, /images-optimized/grade-after-1280.webp 1280w, /images-optimized/grade-after-2000.webp 2000w",
+      "width": 1280,
+      "height": 1600
+    },
+    "width": 1280,
+    "height": 1600,
+    "aspectRatio": 0.8,
+    "sourceFiles": [
+      "CH0A9454 raw.jpg",
+      "CH0A9454.jpg"
+    ],
+    "normalization": {
+      "originalBefore": "2974x3718",
+      "originalAfter": "2974x3718",
+      "cropped": false
+    }
+  }
+]

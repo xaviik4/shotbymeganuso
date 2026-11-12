@@ -1,6 +1,7 @@
 import Reveal from "./Reveal";
 import { C } from "../lib/constants";
 import { useSiteCopy } from "../lib/language";
+import aboutImage from "../data/about-image.generated.json";
 
 export default function About() {
   const { copy } = useSiteCopy();
@@ -10,11 +11,9 @@ export default function About() {
       <div className="section">
         <div className="about-wrap">
           <Reveal>
-            <div
-              className="about-visual"
-              role="img"
-              aria-label="Portrait photography by Alexander"
-            />
+            <div className="about-visual">
+              {aboutImage ? <img src={aboutImage.src} srcSet={aboutImage.srcSet} sizes="(max-width: 820px) 100vw, 40vw" width={aboutImage.width} height={aboutImage.height} alt="Alexander, founder of meganusopr" loading="lazy" decoding="async" /> : <span className="about-wordmark">meganusopr</span>}
+            </div>
           </Reveal>
 
           <Reveal delay={120}>

@@ -140,14 +140,8 @@ body:has(.mobile-drawer.open) .nav { opacity: 0; pointer-events: none; }
 /* ─── BEFORE/AFTER SLIDER ──────────────────────────────────────────── */
 .ba-wrap { margin-top: 48px; position: relative; border-radius: 6px; overflow: hidden; border: 1px solid #232323; aspect-ratio: 16/9; user-select: none; }
 .ba-layer { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
-.ba-before {
-  background: url('/images-optimized/Automotive/CH0A1961-1280.webp') center 52% / cover no-repeat;
-  filter: saturate(.25) contrast(.85) brightness(1.15);
-}
-.ba-after {
-  background: url('/images-optimized/Automotive/CH0A1961-1280.webp') center 52% / cover no-repeat;
-  filter: saturate(1.15) contrast(1.08);
-}
+.ba-before { }
+.ba-after { }
 .ba-clip { overflow: hidden; right: auto; }
 .ba-clip .ba-before { width: 100%; }
 .ba-tag {
@@ -284,7 +278,7 @@ body:has(.mobile-drawer.open) .nav { opacity: 0; pointer-events: none; }
 @media (max-width: 820px) { .about-wrap { grid-template-columns: 1fr; gap: 32px; } }
 .about-visual {
   aspect-ratio: 4/5; border-radius: 4px; border: 1px solid #232323; position: relative;
-  background: url('/images-optimized/Portrait/CH0A5513-1280.webp') center 36% / cover no-repeat;
+  background: #151515;
   display: flex; align-items: center; justify-content: center;
 }
 .about-text { color: #C6C6C6; font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
@@ -1084,6 +1078,37 @@ footer { background: #060606; border-top: 1px solid #232323; padding: 44px 48px;
 .testimonial-grid figure { margin: 0; padding: 24px; border: 1px solid #232323; background: #151515; }
 .testimonial-grid blockquote { margin: 0 0 20px; color: #C6C6C6; line-height: 1.7; }
 .testimonial-grid figcaption { color: var(--orange); font: 11px 'JetBrains Mono', monospace; }
+.ba-wrap { aspect-ratio: auto; touch-action: none; cursor: ew-resize; }
+.ba-image { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; user-select: none; pointer-events: none; }
+.ba-before { filter: none; }
+.ba-after { filter: none; }
+.ba-divider { transform: translateX(-1px); }
+.ba-keyboard { position: absolute; z-index: 5; inset: 0; outline: none; }
+.ba-keyboard:focus-visible { outline: 2px solid #FF4D00; outline-offset: -4px; }
+.ba-dots { display: flex; justify-content: center; gap: 10px; margin-top: 18px; }
+.ba-dot { width: 9px; height: 9px; padding: 0; border: 1px solid #777; border-radius: 50%; background: transparent; cursor: pointer; }
+.ba-dot.active { border-color: #FF4D00; background: #FF4D00; }
+.feat-grid { align-items: stretch; }
+.feat-grid > * { height: 100%; }
+.feat-card { display: flex; flex-direction: column; height: 100%; justify-content: flex-start; }
+.feat-desc { margin-bottom: 0; }
+.about-visual { overflow: hidden; background: #151515; }
+.about-visual::after { content: none; }
+.about-visual img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.about-wordmark { font: clamp(28px, 4vw, 48px)/1 'Bebas Neue', sans-serif; letter-spacing: 3px; color: #F2F0EB; }
+.masonry-grid { columns: 3 260px; column-gap: 14px; }
+.masonry-item { position: relative; display: inline-block; width: 100%; margin: 0 0 14px; break-inside: avoid; overflow: hidden; border: 1px solid #232323; border-radius: 4px; background: #151515; vertical-align: top; }
+.masonry-item:hover { border-color: #FF4D00; }
+.masonry-image { display: block; width: 100%; height: auto; object-fit: contain; }
+.masonry-item .work-overlay { pointer-events: none; }
+.pricing-final-content { display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
+.pricing-final-content .sec-title { margin: 0; }
+.pricing-final-content .sec-sub { margin: 0; }
+.pricing-final-content .btn-primary { align-self: center; }
+.pricing-final .section { padding-top: 100px; padding-bottom: 100px; }
+.ba-wrap { min-height: 0; }
+@media (max-width: 768px) { .pricing-final .section { padding-top: 64px; padding-bottom: 64px; } .masonry-grid { columns: 2 150px; column-gap: 10px; } .masonry-item { margin-bottom: 10px; } }
+@media (max-width: 420px) { .masonry-grid { columns: 1; } }
 @media (max-width: 680px) { .pricing-card { padding: 30px 22px; } .nav-language { display: inline-block; margin: 16px 0 0; } .book-calendar { text-align: center; } }
 
 @media (max-width: 1100px) {

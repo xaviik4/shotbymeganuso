@@ -20,6 +20,8 @@ export default function Footer() {
           <Link to={localizedPath("/privacy", language)}>{copy.footer.privacy}</Link>
           <Link to={otherLanguagePath}>{copy.nav.language}</Link>
           <a href={SOCIALS.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://tiktok.com/@meganusopr" target="_blank" rel="noopener noreferrer">TikTok</a>
+          <a href="https://youtube.com/@meganusopr" target="_blank" rel="noopener noreferrer">YouTube</a>
           <a href={`mailto:${SITE_CONFIG.email}`}>{copy.footer.email}</a>
         </div>
         <span className="mono" style={{ fontSize: 11, color: "#777" }}>

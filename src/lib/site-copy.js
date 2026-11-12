@@ -6,7 +6,7 @@ const copy = {
     },
     hero: {
       eyebrow: "ALEXANDER · ADS / VIDEO / PHOTO",
-      headline: ["MORE CUSTOMERS", "FROM ADS PEOPLE", "ACTUALLY WATCH."],
+      headline: ["CONTENT FOR BRANDS", "THAT REFUSE TO", "BLEND IN."],
       description: "You film it on your phone. I turn it into scroll-stopping ads, run them on Instagram, Facebook, and TikTok, and show you exactly what they brought in. In English y en Español.",
       book: "Book a Free Call", work: "See the Work",
     },
@@ -156,7 +156,7 @@ const copy = {
     },
     hero: {
       eyebrow: "ALEXANDER · ANUNCIOS / VIDEO / FOTO",
-      headline: ["MÁS CLIENTES", "CON ANUNCIOS QUE", "LA GENTE SÍ VE."],
+      headline: ["CONTENIDO PARA MARCAS", "QUE SE NIEGAN A PASAR", "DESAPERCIBIDAS."],
       description: "Tú grabas con tu teléfono. Yo convierto ese material en anuncios que detienen el scroll, los publico en Instagram, Facebook y TikTok, y te muestro exactamente qué resultados generaron. En inglés y en español.",
       book: "Agenda una llamada gratis", work: "Ver mi trabajo",
     },

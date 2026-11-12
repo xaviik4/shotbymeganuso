@@ -9,9 +9,9 @@
 - `src/components/`: shared marketing, navigation, portfolio, contact, and dashboard UI; component CSS is colocated where applicable.
 - `src/context/`: React auth context and session subscription.
 - `src/lib/`: Supabase browser client, site config, EN/ES copy and route helpers, analytics, content queries, and recipe/nutrition data.
-- `src/data/`: Public portfolio photo, video, and testimonial data.
+- `src/data/`: Generated portfolio photo, grade-pair, and about-image manifests plus testimonial data; the optimizer rebuilds these from local originals.
 - `src/styles/`, `src/*.css`: global and legacy application styles.
-- `src/assets/`: bundled assets; `originals/portfolio/` stores local full-size photos and is Git-ignored; `public/images-optimized/` contains committed responsive WebPs used by clean clones and Vercel builds.
+- `src/assets/`: bundled assets; `originals/portfolio/`, `originals/grade/`, and `originals/about/` store local source photos and are Git-ignored; `public/images-optimized/` contains committed flat responsive WebPs used by clean clones and Vercel builds.
 - `api/`: Vercel serverless sync endpoints and server-only helpers; `api/cron/` contains scheduled sync.
 - `api/ops/`: role-checked operations APIs. `src/pages/` operations pages call these APIs; new operations tables have RLS enabled, no anon policies, and membership-scoped authenticated policies.
 - `supabase/migrations/`: SQL schema, RLS policies, and database changes.
@@ -47,4 +47,5 @@
 - [ ] Audit mobile gallery/filter interactions.
 - [x] Add operations CRM, authenticated APIs, public write-only intake, and Los Angeles Monday–Sunday reporting.
 - [x] Rebrand public copy around Alexander and meganusopr; add English/Spanish public routes, prerendered metadata, sitemap, robots rules, privacy page, and optional analytics tracking.
-- [x] Convert portfolio originals to responsive WebP build outputs; keep originals outside `public/`, use lazy gallery images, and maintain empty video/testimonial data until items are supplied.
+- [x] Generate portfolio categories and newest-first image manifests from `originals/portfolio/`; use uncropped masonry, responsive WebPs, and committed generated data so clean clones build without originals.
+- [x] Generate real grade comparison and optional Alexander portrait assets from `originals/grade/` and `originals/about/`; keep empty testimonials wrapper-free and hide video filters until video data exists.
