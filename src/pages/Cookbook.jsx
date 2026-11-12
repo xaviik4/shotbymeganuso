@@ -88,14 +88,10 @@ function RecipeImage({ recipe, cuisine, className, decorative }) {
   }
 
   return (
-    <img
-      className={className}
-      src={recipe.image}
-      alt={decorative ? "" : recipe.name}
-      aria-hidden={decorative ? "true" : undefined}
-      loading="lazy"
-      onError={() => setFailed(true)}
-    />
+    <span className={`protected-media ${className}-frame`} onContextMenu={(event) => event.preventDefault()} onDragOver={(event) => event.preventDefault()} onDrop={(event) => event.preventDefault()}>
+      <img className={className} src={recipe.image} alt={decorative ? "" : recipe.name} aria-hidden={decorative ? "true" : undefined} loading="lazy" draggable="false" onError={() => setFailed(true)} />
+      <span className="image-protection-shield" aria-hidden="true" />
+    </span>
   );
 }
 

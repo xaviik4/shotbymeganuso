@@ -7,6 +7,7 @@ import Features from "../components/Features";
 import About from "../components/About";
 import Faq from "../components/Faq";
 import Contact from "../components/Contact";
+import Testimonials from "../components/Testimonials";
 
 export default function Home({ setToast }) {
   return (
@@ -18,6 +19,7 @@ export default function Home({ setToast }) {
       <Services />
       <Features />
       <About />
+      <Testimonials />
       <Faq />
       <Contact setToast={setToast} />
     </>

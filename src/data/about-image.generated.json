@@ -1,0 +1,7 @@
+{
+  "src": "/images-optimized/about-alexander-1280.webp",
+  "srcSet": "/images-optimized/about-alexander-640.webp 640w, /images-optimized/about-alexander-1280.webp 1280w, /images-optimized/about-alexander-2000.webp 2000w",
+  "width": 1280,
+  "height": 1600,
+  "alt": "Alexander, founder of meganusopr"
+}

@@ -1,10 +1,9 @@
 import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import "./styles/global.css";
 import App from "./App";
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+const root = document.getElementById("root");
+const application = <StrictMode><App /></StrictMode>;
+if (root.hasAttribute("data-prerendered")) hydrateRoot(root, application);
+else createRoot(root).render(application);

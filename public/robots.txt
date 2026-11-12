@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /portal
+Disallow: /cookbook
+Disallow: /tracker
+Disallow: /login
+
+Sitemap: https://www.shotbymeganuso.com/sitemap.xml

@@ -10,6 +10,8 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+originals/
+public/og-meganusopr.png
 *.local
 
 # Editor directories and files
@@ -27,3 +29,6 @@ dist-ssr
 .env
 .env.local
 .env.production
+.vercel
+.env*
+!.env.example

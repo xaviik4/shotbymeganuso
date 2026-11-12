@@ -1,20 +1,22 @@
 import { useState } from "react";
 import Reveal from "./Reveal";
-import { FAQS } from "../lib/constants";
+import { useSiteCopy } from "../lib/language";
 
 export default function Faq() {
   const [open, setOpen] = useState(null);
+  const { copy } = useSiteCopy();
+  const c = copy.faq;
 
   return (
     <section id="faq" aria-labelledby="faq-title">
       <div className="section">
         <Reveal>
-          <div className="sec-label">06 / Questions</div>
-          <h2 className="sec-title" id="faq-title">FAQ</h2>
+          <div className="sec-label">{c.label}</div>
+          <h2 className="sec-title" id="faq-title">{c.title}</h2>
         </Reveal>
 
         <div className="faq-list">
-          {FAQS.map((f, i) => (
+          {c.items.map((f, i) => (
             <div className={`faq-item${open === i ? " open" : ""}`} key={i}>
               <button
                 className="faq-q"

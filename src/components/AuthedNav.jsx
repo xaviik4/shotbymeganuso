@@ -1,5 +1,6 @@
 import { useNavigate, NavLink, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { SITE_CONFIG } from "../lib/site-config";
 
 /**
  * Shared header for every page behind the auth gate.
@@ -11,14 +12,14 @@ export default function AuthedNav() {
 
   async function handleSignOut() {
     await signOut();
-    navigate("/login", { replace: true });
+      navigate("/login", { replace: true });
   }
 
   return (
     <header className="portal-nav">
       <Link to="/portal" className="portal-logo">
         <span className="rec-dot portal-logo-dot" aria-hidden="true"></span>
-        SHOTBYMEGANUSO
+        {SITE_CONFIG.brandName.toUpperCase()}
       </Link>
 
       <div className="portal-nav-actions">

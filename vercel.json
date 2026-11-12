@@ -1,5 +1,21 @@
 {
-  "rewrites": [{ "source": "/((?!api/).*)", "destination": "/index.html" }],
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/dashboard", "destination": "/spa" },
+    { "source": "/dashboard/:path*", "destination": "/spa" },
+    { "source": "/portal/:path*", "destination": "/spa" },
+    { "source": "/login", "destination": "/spa" },
+    { "source": "/cookbook", "destination": "/spa" },
+    { "source": "/tracker", "destination": "/spa" }
+  ],
+  "headers": [
+    { "source": "/dashboard", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] },
+    { "source": "/dashboard/:path*", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] },
+    { "source": "/portal/:path*", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] },
+    { "source": "/login", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] },
+    { "source": "/cookbook", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] },
+    { "source": "/tracker", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }
+  ],
   "crons": [{ "path": "/api/cron/sync", "schedule": "0 7 * * *" }],
   "functions": { "api/**/*.js": { "maxDuration": 30 } }
 }

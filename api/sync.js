@@ -8,7 +8,7 @@
    owns a content_accounts row. Viewers read the numbers the cron collects and
    cannot spend the account's API quota. */
 
-import { getRequestUser } from "./_lib/auth.js";
+import { requireOpsMember } from "./_lib/ops.js";
 import { getAccount, syncAccount } from "./_lib/sync.js";
 import { supabaseAdmin } from "./_lib/supabase-admin.js";
 
@@ -20,10 +20,9 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const user = await getRequestUser(req);
-  if (!user) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
+  const context = await requireOpsMember(req, res, { write: true });
+  if (!context) return;
+  const { user } = context;
 
   try {
     const account = await getAccount(user.id);
