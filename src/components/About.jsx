@@ -11,8 +11,8 @@ export default function About() {
       <div className="section">
         <div className="about-wrap">
           <Reveal>
-            <div className="about-visual">
-              {aboutImage ? <img src={aboutImage.src} srcSet={aboutImage.srcSet} sizes="(max-width: 820px) 100vw, 40vw" width={aboutImage.width} height={aboutImage.height} alt="Alexander, founder of meganusopr" loading="lazy" decoding="async" /> : <span className="about-wordmark">meganusopr</span>}
+            <div className="about-visual protected-media" onContextMenu={(event) => event.preventDefault()} onDragOver={(event) => event.preventDefault()} onDrop={(event) => event.preventDefault()}>
+              {aboutImage ? <><img src={aboutImage.src} srcSet={aboutImage.srcSet} sizes="(max-width: 820px) 100vw, 40vw" width={aboutImage.width} height={aboutImage.height} alt="Alexander, founder of meganusopr" loading="lazy" decoding="async" draggable="false" /><span className="image-protection-shield" aria-hidden="true" /></> : <span className="about-wordmark">meganusopr</span>}
             </div>
           </Reveal>
 

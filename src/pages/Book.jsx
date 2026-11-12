@@ -32,7 +32,8 @@ export default function Book() {
   }
 
   return <div className="book-page">
-    <section className="book-intro" aria-labelledby="book-title"><p className="sec-label">{c.label}</p><h1 className="sec-title" id="book-title">{c.title}</h1><p className="sec-sub">{c.description}</p><a className="btn-primary" href={SITE_CONFIG.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackLead("booking_click")}>{c.call}</a></section>
+    <section className="page-header book-page-header" aria-labelledby="book-title"><div className="section"><div className="page-header-content book-intro"><p className="sec-label">{c.label}</p><h1 className="sec-title" id="book-title">{c.title}</h1><p className="sec-sub">{c.description}</p><a className="btn-primary" href={SITE_CONFIG.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={() => trackLead("booking_click")}>{c.call}</a><p className="book-form-prompt">{c.formIntro}</p></div></div></section>
+    <div className="book-content">
     <form className="book-form" onSubmit={submit}>
       <div className="book-honeypot" aria-hidden="true"><label htmlFor="book-website-url">Leave this field empty</label><input id="book-website-url" name="website_url" type="text" tabIndex={-1} autoComplete="off" /></div>
       <label className="form-group book-field"> <span className="form-label">{c.name}</span><input className="form-input" required name="name" autoComplete="name" value={form.name} onChange={change} /></label>
@@ -47,6 +48,7 @@ export default function Book() {
       {status && <p className="book-status" role="status">{status}</p>}
       <button className="form-submit book-submit" disabled={sending}>{sending ? c.sending : c.submit}</button>
     </form>
-    <section className="book-calendar"><p className="sec-label">{c.schedule}</p><h2 className="sec-title">{c.call}</h2><p className="sec-sub">{c.formIntro}</p><a className="btn-outline" href={SITE_CONFIG.bookingUrl} target="_blank" rel="noopener noreferrer">{c.call}</a>{/* Cal.com/Calendly booking widget embed slot. */}</section>
+    {/* Cal.com/Calendly embed slot: add the booking widget here when ready. */}
+    </div>
   </div>;
 }

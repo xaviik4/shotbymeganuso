@@ -33,11 +33,12 @@ export default function GradeSlider() {
     if (event.key === "End") { event.preventDefault(); setPosition(100); }
   };
 
-  return <section id="grade" aria-labelledby="grade-title"><div className="section">
-    <Reveal><div className="sec-label">{c.label}</div><h2 className="sec-title" id="grade-title">{c.title}</h2><p className="sec-sub">{c.description}</p></Reveal>
-    <Reveal delay={100}><div className="ba-wrap" style={{ aspectRatio: `${pair.width} / ${pair.height}` }} onPointerDown={(event) => { pointerActive.current = true; event.currentTarget.setPointerCapture(event.pointerId); updateFromPointer(event); }} onPointerMove={updateFromPointer} onPointerUp={() => { pointerActive.current = false; }} onPointerCancel={() => { pointerActive.current = false; }}>
+  return <section id="grade" aria-labelledby="grade-title"><div className="section grade-layout">
+    <Reveal><div className="grade-copy"><div className="sec-label">{c.label}</div><h2 className="sec-title" id="grade-title">{c.title}</h2><p className="sec-sub">{c.description}</p></div></Reveal>
+    <Reveal delay={100}><div className="ba-wrap protected-media" style={{ aspectRatio: `${pair.width} / ${pair.height}`, "--grade-ratio": pair.width / pair.height }} onPointerDown={(event) => { pointerActive.current = true; event.currentTarget.setPointerCapture(event.pointerId); updateFromPointer(event); }} onPointerMove={updateFromPointer} onPointerUp={() => { pointerActive.current = false; }} onPointerCancel={() => { pointerActive.current = false; }} onContextMenu={(event) => event.preventDefault()} onDragOver={(event) => event.preventDefault()} onDrop={(event) => event.preventDefault()}>
       <img className="ba-image ba-before" src={pair.before.src} srcSet={pair.before.srcSet} sizes="(max-width: 768px) 100vw, 90vw" width={pair.before.width} height={pair.before.height} alt="" aria-hidden="true" draggable="false" />
       <img className="ba-image ba-after" src={pair.after.src} srcSet={pair.after.srcSet} sizes="(max-width: 768px) 100vw, 90vw" width={pair.after.width} height={pair.after.height} alt="" aria-hidden="true" draggable="false" style={{ clipPath: `inset(0 0 0 ${position}%)` }} />
+      <span className="image-protection-shield" aria-hidden="true" />
       <span className="ba-tag raw">{c.raw}</span><span className="ba-tag graded">{c.graded}</span>
       <div className="ba-divider" style={{ left: `${position}%` }} aria-hidden="true"><div className="ba-handle">↔</div></div>
       <div className="ba-keyboard" role="slider" tabIndex={0} aria-label={c.sliderLabel} aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(position)} onKeyDown={onKeyDown} />

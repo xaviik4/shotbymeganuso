@@ -42,19 +42,20 @@ function titleFromFilename(file) {
   return rawName.split(" ").filter(Boolean).map((part) => `${part[0].toUpperCase()}${part.slice(1).toLowerCase()}`).join(" ") || "Photo";
 }
 
-function exifDateTimeOriginal(exif) {
-  if (!exif?.length) return null;
+function parseExif(exif) {
+  if (!exif?.length) return {};
   const marker = exif.indexOf(Buffer.from("Exif\0\0"));
   const tiffStart = marker >= 0 ? marker + 6 : 0;
   const tiff = exif.subarray(tiffStart);
-  if (tiff.length < 8) return null;
+  if (tiff.length < 8) return {};
   const little = tiff.toString("ascii", 0, 2) === "II";
-  if (!little && tiff.toString("ascii", 0, 2) !== "MM") return null;
+  if (!little && tiff.toString("ascii", 0, 2) !== "MM") return {};
   const u16 = (offset) => offset + 2 <= tiff.length ? (little ? tiff.readUInt16LE(offset) : tiff.readUInt16BE(offset)) : null;
   const u32 = (offset) => offset + 4 <= tiff.length ? (little ? tiff.readUInt32LE(offset) : tiff.readUInt32BE(offset)) : null;
-  if (u16(2) !== 42) return null;
+  if (u16(2) !== 42) return {};
 
-  function findTag(ifdOffset, tagId) {
+  function getTag(ifdOffset, tagId) {
+    if (!Number.isInteger(ifdOffset)) return null;
     const count = u16(ifdOffset);
     if (!Number.isInteger(count)) return null;
     for (let i = 0; i < count; i += 1) {
@@ -62,10 +63,22 @@ function exifDateTimeOriginal(exif) {
       if (u16(entry) !== tagId) continue;
       const type = u16(entry + 2);
       const valueCount = u32(entry + 4);
-      if (type !== 2 || !valueCount) return null;
-      const valueStart = valueCount <= 4 ? entry + 8 : u32(entry + 8);
-      if (!Number.isInteger(valueStart) || valueStart + valueCount > tiff.length) return null;
-      return tiff.toString("ascii", valueStart, valueStart + valueCount).replace(/\0.*$/, "").trim();
+      if (!valueCount) return null;
+      const bytesPerValue = ({ 1: 1, 2: 1, 3: 2, 4: 4, 5: 8, 7: 1, 9: 4, 10: 8 })[type];
+      if (!bytesPerValue) return null;
+      const byteLength = valueCount * bytesPerValue;
+      const valueStart = byteLength <= 4 ? entry + 8 : u32(entry + 8);
+      if (!Number.isInteger(valueStart) || valueStart + byteLength > tiff.length) return null;
+      if (type === 2) return tiff.toString("ascii", valueStart, valueStart + byteLength).replace(/\0.*$/, "").trim();
+      if (type === 3) return valueCount === 1 ? u16(valueStart) : Array.from({ length: valueCount }, (_, j) => u16(valueStart + (j * 2)));
+      if (type === 4) return valueCount === 1 ? u32(valueStart) : Array.from({ length: valueCount }, (_, j) => u32(valueStart + (j * 4)));
+      if (type === 5 || type === 10) {
+        const signed = type === 10;
+        const numerator = signed ? (little ? tiff.readInt32LE(valueStart) : tiff.readInt32BE(valueStart)) : u32(valueStart);
+        const denominator = signed ? (little ? tiff.readInt32LE(valueStart + 4) : tiff.readInt32BE(valueStart + 4)) : u32(valueStart + 4);
+        return denominator ? numerator / denominator : null;
+      }
+      return null;
     }
     return null;
   }
@@ -80,11 +93,30 @@ function exifDateTimeOriginal(exif) {
     }
     return null;
   })();
-  const value = findTag(exifIfdPointer, 0x9003) || findTag(ifd0, 0x0132);
-  const match = value?.match(/^(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})$/);
-  if (!match) return null;
-  const [, year, month, day, hour, minute, second] = match.map(Number);
-  return Date.UTC(year, month - 1, day, hour, minute, second);
+  const make = getTag(ifd0, 0x010f);
+  const model = getTag(ifd0, 0x0110);
+  const dateTimeOriginal = getTag(exifIfdPointer, 0x9003);
+  const dateMatch = dateTimeOriginal?.match(/^(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})$/);
+  const result = {};
+  if (make) result.cameraMake = make;
+  if (model) result.cameraModel = model;
+  if (make || model) result.camera = model && make && !model.toLowerCase().startsWith(make.toLowerCase()) ? `${make} ${model}` : model || make;
+  const lens = getTag(exifIfdPointer, 0xa434);
+  if (lens) result.lens = lens;
+  const focalLength = getTag(exifIfdPointer, 0x920a);
+  if (Number.isFinite(focalLength)) result.focalLength = `${Number.isInteger(focalLength) ? focalLength : focalLength.toFixed(1)}mm`;
+  const aperture = getTag(exifIfdPointer, 0x829d);
+  if (Number.isFinite(aperture)) result.aperture = `f/${aperture.toFixed(1)}`;
+  const exposure = getTag(exifIfdPointer, 0x829a);
+  if (Number.isFinite(exposure) && exposure > 0) result.shutterSpeed = exposure >= 1 ? `${exposure.toFixed(1).replace(/\.0$/, "")}s` : `1/${Math.round(1 / exposure)}`;
+  const iso = getTag(exifIfdPointer, 0x8827);
+  const isoValue = Array.isArray(iso) ? iso[0] : iso;
+  if (Number.isFinite(isoValue)) result.iso = isoValue;
+  if (dateMatch) {
+    const [, year, month, day, hour, minute, second] = dateMatch.map(Number);
+    result.captureTimestamp = Date.UTC(year, month - 1, day, hour, minute, second);
+  }
+  return result;
 }
 
 async function getPhotoMetadata(file) {
@@ -92,12 +124,17 @@ async function getPhotoMetadata(file) {
   const rotated = [5, 6, 7, 8].includes(metadata.orientation);
   const width = rotated ? metadata.height : metadata.width;
   const height = rotated ? metadata.width : metadata.height;
-  const exifCapture = exifDateTimeOriginal(metadata.exif);
+  const exif = parseExif(metadata.exif);
+  const exifPresent = Boolean(metadata.exif?.length);
+  const exifCapture = exif.captureTimestamp;
+  delete exif.captureTimestamp;
   return {
     width,
     height,
     capturedAt: new Date(exifCapture ?? stat.mtimeMs).toISOString(),
     dateSource: exifCapture ? "exif" : "file-modified",
+    exif,
+    exifPresent,
   };
 }
 
@@ -140,6 +177,7 @@ await fs.mkdir(outputRoot, { recursive: true });
 const originalsAvailable = await isDirectory(originalsRoot);
 let processedCount = 0;
 const dateSourceCounts = { exif: 0, "file-modified": 0 };
+const missingExifFiles = [];
 
 if (!originalsAvailable) {
   console.log("Original photos are unavailable; preserving committed optimized assets and generated data.");
@@ -155,6 +193,7 @@ if (!originalsAvailable) {
       if (!category || category.startsWith(".")) { warnSkipped(file, "file is not inside a category folder"); continue; }
       try {
         const metadata = await getPhotoMetadata(file);
+        if (!metadata.exifPresent) missingExifFiles.push(path.relative(portfolioRoot, file));
         const categorySlug = slug(category);
         const filenameSlug = slug(path.basename(file, path.extname(file))
           .replace(/^\d+[\s_-]*/, "").replace(/[_\s]+/g, "-"));
@@ -171,6 +210,7 @@ if (!originalsAvailable) {
           alt: `${titleFromFilename(file)}, ${category} photography by Alexander`,
           capturedAt: metadata.capturedAt,
           dateSource: metadata.dateSource,
+          exif: metadata.exif,
           width: optimized.width,
           height: optimized.height,
           src: optimized.src,
@@ -274,6 +314,7 @@ if (!originalsAvailable) {
   for (const file of staleOutputs) await fs.rm(file);
   console.log(`Portfolio processed: ${photos.length} image(s) across ${categories.length} category folder(s); DateTimeOriginal=${dateSourceCounts.exif}, file-modified fallback=${dateSourceCounts["file-modified"]}.`);
   console.log(`Grade pair: ${gradePairs.length ? gradePairs[0].sourceFiles.join(" => ") : "not supplied"}; About portrait: ${aboutImage ? "processed" : "not supplied"}.`);
+  if (missingExifFiles.length) console.warn(`[assets] No EXIF metadata: ${missingExifFiles.join(", ")}`);
   console.log(`Processed ${processedCount} source images at ${widths.join(", ")}px; stale optimized WebPs removed: ${staleOutputs.length}.`);
 }
 

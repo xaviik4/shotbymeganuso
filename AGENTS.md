@@ -29,6 +29,12 @@
 
 # Development Rules
 - Keep edits focused and minimal; preserve the existing React/Vite structure unless migration is requested.
+- Section numbering such as `01 / ...` appears only on homepage sections. Standalone pages never use section numbers.
+- Standalone page headers use one shared compact top spacing on Work, Pricing, Book, Privacy, and other standalone routes. Center each header's eyebrow, heading, subtext, and buttons together as one column.
+- Never render an empty section or its spacing wrapper when the section data is empty.
+- Every rendered image except OG previews uses optimized web-size assets (maximum 2000px) and a transparent protective overlay. Disable context menu, drag/drop, selection, and mobile long-press saving; never link directly to an image. Preserve useful alt text and keyboard/screen-reader access.
+- `originals/` is the ignored source of truth for portfolio, grade, and about photos. Never commit originals; regenerate optimized images and manifests from those files.
+- Any public copy change must update both English and natural Latin American Spanish.
 - **Person/Bio:** Alexander is the creator and the personal voice used in bios, introductions, and about copy.
 - **Digital Face & Copyright:** Use `meganusopr` as the online handle on social links and footer copyright. Do not pair it with Alexander as a double name.
 - **Domain/Site Name:** `shotbymeganuso` is the website/domain name (`shotbymeganuso.com`), not a studio, agency, or company. Do not describe it as an organization being built.
@@ -47,5 +53,5 @@
 - [ ] Audit mobile gallery/filter interactions.
 - [x] Add operations CRM, authenticated APIs, public write-only intake, and Los Angeles Monday–Sunday reporting.
 - [x] Rebrand public copy around Alexander and meganusopr; add English/Spanish public routes, prerendered metadata, sitemap, robots rules, privacy page, and optional analytics tracking.
-- [x] Generate portfolio categories and newest-first image manifests from `originals/portfolio/`; use uncropped masonry, responsive WebPs, and committed generated data so clean clones build without originals.
+- [x] Generate portfolio categories, EXIF details, and newest-first image manifests from `originals/portfolio/`; use uncropped masonry, responsive WebPs, and committed generated data so clean clones build without originals.
 - [x] Generate real grade comparison and optional Alexander portrait assets from `originals/grade/` and `originals/about/`; keep empty testimonials wrapper-free and hide video filters until video data exists.

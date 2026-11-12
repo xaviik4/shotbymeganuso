@@ -92,7 +92,7 @@ const copy = {
     },
     testimonials: { label: "CLIENT NOTES", title: "What clients say" },
     pricing: {
-      label: "01 / PRICING", title: "Clear, Simple Pricing",
+      label: "PRICING", title: "Clear, Simple Pricing",
       tabs: { ads: "Ads", video: "Video", photography: "Photography" },
       tabIntro: {
         ads: "Done-for-you ads that bring in customers, not just likes.",
@@ -134,7 +134,7 @@ const copy = {
     book: {
       label: "START A CONVERSATION", title: "Tell me what you're building.",
       description: "Share a little about your business and what you need. I'll follow up to find a good next step.",
-      schedule: "BOOK A FREE 15-MINUTE CALL", call: "Open the booking calendar", formIntro: "Prefer to write? Send an inquiry below.",
+      call: "Open the booking calendar", formIntro: "Prefer to write? Fill out the form below.",
       languageOptions: ["Spanish", "English", "Both"],
       name: "Name *", email: "Email *", phone: "Phone *", business: "Business name", instagram: "Instagram handle", website: "Website",
       help: "What would you most like help with? *", clients: "How are you getting new clients right now? *", language: "Do your clients prefer Spanish, English or both? *",
@@ -242,7 +242,7 @@ const copy = {
     },
     testimonials: { label: "OPINIONES", title: "Lo que dicen mis clientes" },
     pricing: {
-      label: "01 / PRECIOS", title: "Precios claros y sencillos",
+      label: "PRECIOS", title: "Precios claros y sencillos",
       tabs: { ads: "Anuncios", video: "Video", photography: "Fotografía" },
       tabIntro: {
         ads: "Anuncios gestionados para atraer clientes, no solo likes.",
@@ -284,7 +284,7 @@ const copy = {
     book: {
       label: "EMPECEMOS A HABLAR", title: "Cuéntame qué quieres crear.",
       description: "Cuéntame un poco de tu negocio y lo que necesitas. Te escribiré para encontrar el siguiente paso.",
-      schedule: "AGENDA UNA LLAMADA GRATIS DE 15 MINUTOS", call: "Abrir el calendario", formIntro: "¿Prefieres escribir? Envíame una consulta aquí abajo.",
+      call: "Abrir el calendario", formIntro: "¿Prefieres escribir? Completa el formulario a continuación.",
       languageOptions: ["Español", "Inglés", "Ambos"],
       name: "Nombre *", email: "Correo electrónico *", phone: "Teléfono *", business: "Nombre del negocio", instagram: "Usuario de Instagram", website: "Sitio web",
       help: "¿Con qué te gustaría recibir más ayuda? *", clients: "¿Cómo consigues nuevos clientes actualmente? *", language: "¿Tus clientes prefieren español, inglés o ambos? *",
